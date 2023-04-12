@@ -17,7 +17,7 @@
 
 <body>
     <!-- Responsive Navigation Bar -->
-    <nav class="navbar navbar-expand-md bg mb-5">
+    <nav class="navbar navbar-expand-md bg mb-4">
         <a href="shop.php" class="navbar-brand  fs-3 text-white p-2">Quantic <span class="text-danger">Networks</span></a>
         <button class="navbar-toggler me-3" type="button" data-bs-toggle="collapse" data-bs-target="#btn">
             <i class='bx bx-menu text-white bx-md'></i>
