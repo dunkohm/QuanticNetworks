@@ -50,39 +50,10 @@ include("functions/main_function.php");
           </div>
         </form>
         <div class="col-md-10">
-          <div class="row px-1">
-
-             <!-- This is where the product card goes -->
-            <div class="col-md-4">
-              <div class='card text-center mb-3'>
-         <img src='imgs/Products/product1.jpg' class='card-img-center' alt='$product_title'>
-         <div class='card-body'>
-           <h5 class='card-title'>$product_title</h5>
-           <p class='card-text'>$product_description</p>
-           <a href='#' class='btn bg text-light btn-outline-secondary'>Order</a>
-           <a href='product_details.php?product_id=$product_id' class='btn btn-outline-success'>View more</a>
-         </div>
-       </div>
-            </div>
-            <!-- This is where the related product images go -->
-            <div class="col-md-8">
-              <div class="row">
-                <div class="col-md-12">
-                  <h4 class="text-center text-label">Related products</h4>
-                </div>
-                <div class="col-md-6">
-                  <img src='imgs/Products/product3.jpg' class='card-img-center' alt='$product_title'>
-
-                </div>
-                <div class="col-md-6">
-                  <img src='imgs/Products/product4.jpg' class='card-img-center' alt='$product_title'>
-
-                </div>
-              </div>
-            </div>
+          <div class="row px-1">            
             <!-- Calling function to fetch products from the database -->
             <?php 
-           
+           view_product_details();
            get_unique_Categories();
            get_unique_Brands();
             ?>
