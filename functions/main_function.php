@@ -1,6 +1,7 @@
 <?php
 
 include('./includes/connect.php');
+
 // function to fetch products from the database
 function getProducts(){
     global $con;
@@ -27,7 +28,7 @@ function getProducts(){
            <h5 class='card-title'>$product_title</h5>
            <p class='card-text'>$product_description</p>
            <a href='#' class='btn bg text-light btn-outline-secondary'>Order</a>
-           <a href='#' class='btn btn-outline-success'>View more</a>
+           <a href='product_details.php?product_id=$product_id' class='btn btn-outline-success'>View more</a>
          </div>
        </div>
      </div>";
@@ -68,7 +69,7 @@ function get_unique_Categories(){
            <h5 class='card-title'>$product_title</h5>
            <p class='card-text'>$product_description</p>
            <a href='#' class='btn bg text-light btn-outline-secondary'>Order</a>
-           <a href='#' class='btn btn-outline-success'>View more</a>
+           <a href='product_details.php?product_id= $product_id' class='btn btn-outline-success'>View more</a>
          </div>
        </div>
      </div>";
@@ -109,7 +110,7 @@ function get_unique_Brands(){
          <h5 class='card-title'>$product_title</h5>
          <p class='card-text'>$product_description</p>
          <a href='#' class='btn bg text-light btn-outline-secondary'>Order</a>
-         <a href='#' class='btn btn-outline-success'>View more</a>
+         <a href='product_details.php?product_id= $product_id' class='btn btn-outline-success'>View more</a>
           </div>
         </div>
       </div>";
@@ -176,7 +177,7 @@ function searchProducts(){
          <h5 class='card-title'>$product_title</h5>
          <p class='card-text'>$product_description</p>
          <a href='#' class='btn bg text-light btn-outline-secondary'>Order</a>
-         <a href='#' class='btn btn-outline-success'>View more</a>
+         <a href='product_details.php?product_id= $product_id' class='btn btn-outline-success'>View more</a>
        </div>
      </div>
    </div>";
@@ -210,7 +211,7 @@ function get_all_products(){
            <h5 class='card-title'>$product_title</h5>
            <p class='card-text'>$product_description</p>
            <a href='#' class='btn bg text-light btn-outline-secondary'>Order</a>
-           <a href='#' class='btn btn-outline-success'>View more</a>
+           <a href='product_details.php?product_id= $product_id' class='btn btn-outline-success'>View more</a>
          </div>
        </div>
      </div>";
