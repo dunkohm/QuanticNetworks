@@ -5,7 +5,10 @@ include("functions/main_function.php");
 ?>
 <!doctype html>
 <html lang="en">
-
+<!-- calling the cart function -->
+<?php
+  cart();
+  ?>
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
