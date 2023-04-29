@@ -2,10 +2,13 @@
 include("shop-header.php");
 include("includes/connect.php");
 include("functions/main_function.php");
+
 ?>
 <!doctype html>
 <html lang="en">
-
+<?php
+  cart();
+  ?>
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -19,6 +22,7 @@ include("functions/main_function.php");
 </head>
 
 <body>
+
   <main>
     <div class="container container-fluid">
       <div class="row bg text-light text-center ">
@@ -56,6 +60,9 @@ include("functions/main_function.php");
            getProducts();
            get_unique_Categories();
            get_unique_Brands();
+           // $ip = getIPAddress();  
+           //   echo 'User Real IP Address - '.$ip;
+
             ?>
           
           </div>

@@ -30,6 +30,9 @@
                 <li class="nav-item">
                     <a href="display_all_products.php" class="nav-link mx-2 text-white fs-5">Products</a>
                 </li>
+                <li class="nav-item">
+                    <a href="display_all_products.php" class="nav-link mx-2 text-white fs-5">Total Price : Kes <span class="text-danger">0</span> </a>
+                </li>
                 
             </ul>
             <div class="d-flex justify-content-evenly ">
