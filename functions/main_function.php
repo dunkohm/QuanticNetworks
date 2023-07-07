@@ -27,7 +27,7 @@ function getProducts(){
          <div class='card-body'>
            <h5 class='card-title'>$product_title</h5>
            <p class='card-text'>$product_description</p>
-           <a href='shop.php?add_to_cart=$product_id' class='btn bg text-light btn-outline-secondary'>Add to cart</a>
+           <a href='shop.php?add_to_cart=$product_id' class='btn bg btn-outline-success'>Add to cart</a>
            <a href='product_details.php?product_id=$product_id' class='btn btn-outline-success'>View more</a>
          </div>
        </div>
@@ -68,7 +68,7 @@ function get_unique_Categories(){
          <div class='card-body'>
            <h5 class='card-title'>$product_title</h5>
            <p class='card-text'>$product_description</p>
-           <a href='shop.php?add_to_cart=$product_id' class='btn bg text-light btn-outline-secondary'>Add to cart</a>
+           <a href='shop.php?add_to_cart=$product_id' class='btn bg btn-outline-success'>Add to cart</a>
            <a href='product_details.php?product_id= $product_id' class='btn btn-outline-success'>View more</a>
          </div>
        </div>
@@ -109,7 +109,7 @@ function get_unique_Brands(){
        <div class='card-body'>
          <h5 class='card-title'>$product_title</h5>
          <p class='card-text'>$product_description</p>
-         <a href='shop.php?add_to_cart=$product_id' class='btn bg text-light btn-outline-secondary'>Add to cart</a>
+         <a href='shop.php?add_to_cart=$product_id' class='btn bg  btn-outline-success'>Add to cart</a>
          <a href='product_details.php?product_id= $product_id' class='btn btn-outline-success'>View more</a>
           </div>
         </div>
@@ -177,7 +177,7 @@ function searchProducts(){
        <div class='card-body'>
          <h5 class='card-title'>$product_title</h5>
          <p class='card-text'>$product_description</p>
-         <a href='shop.php?add_to_cart=$product_id' class='btn bg text-light btn-outline-secondary'>Add to cart</a>
+         <a href='shop.php?add_to_cart=$product_id' class='btn bg btn-outline-success'>Add to cart</a>
          <a href='product_details.php?product_id= $product_id' class='btn btn-outline-success'>View more</a>
        </div>
      </div>
@@ -211,7 +211,7 @@ function get_all_products(){
          <div class='card-body'>
            <h5 class='card-title'>$product_title</h5>
            <p class='card-text'>$product_description</p>
-           <a href='shop.php?add_to_cart=$product_id' class='btn bg text-light btn-outline-secondary'>Add to cart</a>
+           <a href='shop.php?add_to_cart=$product_id' class='btn bg btn-outline-success'>Add to cart</a>
            <a href='product_details.php?product_id= $product_id' class='btn btn-outline-success'>View more</a>
          </div>
        </div>
@@ -250,7 +250,7 @@ function view_product_details(){
          <div class='card-body'>
            <h5 class='card-title'>$product_title</h5>
            <p class='card-text'>$product_description</p>
-           <a href='shop.php?add_to_cart=$product_id' class='btn bg text-light btn-outline-secondary'>Add to cart</a>
+           <a href='shop.php?add_to_cart=$product_id' class='btn bg btn-outline-success'>Add to cart</a>
            <a href='shop.php' class='btn btn-outline-success'>Shop more</a>
          </div>
        </div>
@@ -310,7 +310,7 @@ function view_product_details(){
 
       }else{
         // if the cart data is not present in the database now it is added
-        $insert_query="insert into `cart_details` (product_id,ip_address,quantity) values($get_product_id,'$get_ip',0)";
+        $insert_query="insert into `cart_details` (product_id,ip_address,quantity) values($get_product_id,'$get_ip',0)";//the quantity is 0 as the default before finishing the cart logic
         $result_query=mysqli_query($con,$insert_query);
         echo "<script>alert('Item added to cart successfully')</script>";
         echo "<script>window.open('shop.php','_self')</script>";
@@ -318,4 +318,41 @@ function view_product_details(){
     }
 
   } 
+  // function for getting number of products in the cart
+  function cart_items(){
+    if (isset($_GET['add_to_cart'])) {
+      global $con;
+      $get_ip = getIPAddress();//calling the function to get user Ip address and storing it in get_ip
+      $select_query= "select * from `cart_details` where ip_address='$get_ip'";
+      $result_query=mysqli_query($con,$select_query);
+      $cart_items_count=mysqli_num_rows($result_query);
+      }else{
+       global $con;
+      $get_ip = getIPAddress();//calling the function to get user Ip address and storing it in get_ip
+      $select_query= "select * from `cart_details` where ip_address='$get_ip'";
+      $result_query=mysqli_query($con,$select_query);
+      $cart_items_count=mysqli_num_rows($result_query);
+      
+    }
+    echo $cart_items_count;
+  }
+  // function for getting the total price of the cart items
+  function total_price(){
+     global $con;
+     $total_price=0;
+      $get_ip = getIPAddress();//calling the function to get user Ip address and storing it in get_ip
+      $cart_query= "select * from `cart_details` where ip_address='$get_ip'";
+      $result_query=mysqli_query($con,$cart_query);
+      while($row=mysqli_fetch_array($result_query)){
+        $product_id=$row['product_id'];
+        $select_products="select * from `products` where product_id='$product_id'";
+        $result_products=mysqli_query($con,$select_products);
+        while($row_product_price=mysqli_fetch_array($result_products)){
+          $product_price=array($row_product_price['product_price']);
+          $product_values=array_sum($product_price);
+          $total_price+=$product_values;
+        }
+      }
+      echo $total_price;
+  }
 ?>

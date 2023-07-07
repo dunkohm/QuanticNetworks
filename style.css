@@ -207,3 +207,9 @@ display: -webkit-box;
 -webkit-box-orient: vertical;
 overflow: hidden;
 }
+.cart{
+    width: 20px;
+    height: 20px;
+    text-decoration: none;
+}
+.

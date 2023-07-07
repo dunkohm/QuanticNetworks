@@ -1,3 +1,7 @@
+<?php 
+include("functions/main_function.php");
+include("includes/connect.php");
+?>
 <!doctype html>
 <html lang="en">
 
@@ -38,7 +42,7 @@
             <div class="d-flex justify-content-evenly ">
                 <a href="#"><i class="bi bi-facebook text-white fs-5 mx-3"></i></a>
                 <a href="#"><i class="bi bi-instagram text-white fs-5 mx-3"></i></a>
-                <a href="#"><i class="bi bi-cart text-white fs-7 mx-2"><sup class="text-label">1</sup></i></a>
+                <a href="#"><h4><i class="bi bi-cart text-white mx-2"><sup class="text-label text-danger"><?php cart_items();?></sup></i></h4></a>
             </div>
             <ul class="navbar-nav ms-auto ">
                 <li class="nav-item">
