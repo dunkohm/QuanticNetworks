@@ -77,24 +77,28 @@ include("functions/main_function.php");
           <div class="row">
             <form action="" method="post">
             <table class="table table-bordered text-center">
-              <thead>
-                <tr>
-                  <th>Product title</th>
-                  <th>Product Image</th>
-                  <th>Quantity</th>
-                  <th>Total Price</th>
-                  <th>Remove</th>
-                  <th colspan="2">Operations</th>
-                </tr>
-              </thead>
-              <tbody>
+              
                 <!-- PHP code to display dynamic cart items from the database -->
-                <?php
-                global $con;
-     $total_price=0;
+    <?php
+      global $con;
       $get_ip = getIPAddress();//calling the function to get user Ip address and storing it in get_ip
       $cart_query= "select * from `cart_details` where ip_address='$get_ip'";
       $result_query=mysqli_query($con,$cart_query);
+      $result_count=mysqli_num_rows($result_query);//This codes counts the number of rows in the cart details table and list them in table format
+      if($result_count>0){
+        // Cart table headers
+       echo "<thead>
+       <tr>
+         <th>Product title</th>
+         <th>Product Image</th>
+         <th>Quantity</th>
+         <th>Total Price</th>
+         <th>Remove</th>
+         <th colspan='2'>Operations</th>
+       </tr>
+     </thead>
+     <tbody>";
+     
       while($row=mysqli_fetch_array($result_query)){
         $product_id=$row['product_id'];
         $select_products="select * from `products` where product_id='$product_id'";
@@ -133,14 +137,30 @@ include("functions/main_function.php");
                   </td>
                 </tr>
                 <?php   }
-      }?>
+       }}
+         else{
+          echo "<h2 class='text-center text-danger'>Your cart is Empty!</h2>";
+         }
+       ?>
               </tbody>
             </table>
             <!-- Subtotal section -->
             <div class="d-flex">
-              <h4 class="px-3 m-2">Subtotal : KES <strong class="text-danger"><?php echo $total_price ; ?></strong>/= </h4>
-              <a href="shop.php"><button class="btn btn-outline-success px-3 py-2 mx-2" type="button" id="button-addon2">Shop for more Products</button></a>
-              <a href="#"><button class="btn btn-outline-secondary px-3 py-2" type="button" id="button-addon2">Proceed to Checkout</button></a>
+              <?php 
+               $get_ip = getIPAddress();//calling the function to get user Ip address and storing it in get_ip
+               $cart_query= "select * from `cart_details` where ip_address='$get_ip'";
+               $result_query=mysqli_query($con,$cart_query);
+               $result_count=mysqli_num_rows($result_query);
+               if($result_count>0){
+                echo "<h4 class='px-3 m-2'>Subtotal : KES <strong class='text-danger'> $total_price</strong>/= </h4>
+                <a href='shop.php'><button class='btn btn-outline-success px-3 py-2 mx-2' type='button' id='button-addon2'>Shop for more Products</button></a>
+                <a href='#'><button class='btn btn-outline-secondary px-3 py-2' type='button' id='button-addon2'>Proceed to Checkout</button></a>";
+               }
+               else{
+                echo "<a href='shop.php'><button class='btn btn-outline-success px-3 py-2 mx-auto mb-3' type='button' id='button-addon2'>Shop for more Products</button></a>";
+               }
+              ?>
+              
             </div>
           </div>
         </div>
