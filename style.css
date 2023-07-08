@@ -190,15 +190,16 @@ body {
 .card-img-top{
 width: 100%;
 height: 200px;
-object-fit: cover;
-margin: 10px;
+object-fit: contain;
+/* margin: 10px; */
 
 }
 .card-img-center{
     width: 100%;
     height: 200px;
-    object-fit: cover;
-    margin: 10px;  
+    object-fit: contain;
+    /* margin: 10px;   */
+    overflow: hidden;
 }
 .card .card-body p {
 text-align: justify;
@@ -212,4 +213,3 @@ overflow: hidden;
     height: 20px;
     text-decoration: none;
 }
-.

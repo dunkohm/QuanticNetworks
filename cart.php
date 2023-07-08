@@ -110,16 +110,18 @@ include("functions/main_function.php");
                 <tr>
                   <td><?php echo $product_title ; ?></td>
                   <td> <img src="adminControl/product-images/<?php echo $product_image1 ; ?>" class="cart-img"> </td>
-                  <td> <input type="text" name="" class="form-input w-50"> </td>
+                  <td> <input type="text" name="qty" class="form-input w-50"> </td>
                   <td><?php echo $price_table ; ?>/=</td>
-                  <td> <input type="checkbox" name="qty" id=""> </td>
+                  <!-- I am using [] because I am deleting multiple items from the db hence to initialize the delete in array form -->
+                  <td> <input type="checkbox" name="removeItem[]" value=" <?php echo $product_id ?>" > </td>
                   <!-- Code to update quantity -->
                   <?php
-                  $get_ip = getIPAddress();
+                  $get_ip_add = getIPAddress();
                   if(isset($_POST['update_cart'])){
                     $quantity=$_POST['qty'];
-                    $update_query="update `cart_details` set quantity=$quantity where ip_address=$get_ip";
-                    $result_query=mysqli_query($con,$update_query);
+                    $update_cart_qty="update `cart_details` set quantity=$quantity where ip_address='$get_ip_add'";
+                    $result_query_quantity=mysqli_query($con,$update_cart_qty);
+                    $total_price= $total_price *  $quantity;
 
                   }
 
@@ -127,7 +129,7 @@ include("functions/main_function.php");
                   ?>
                   <td>
                     <input type="submit" name="update_cart" value="Update Cart" class="btn btn-outline-success">
-                    <input type="submit" name="" value="Delete" class="btn btn-outline-danger">
+                    <input type="submit" name="remove_cart" value="Remove" class="btn btn-outline-danger">
                   </td>
                 </tr>
                 <?php   }
@@ -143,6 +145,28 @@ include("functions/main_function.php");
           </div>
         </div>
         </form>
+        <?php
+
+        function delete_cart_item(){
+          global $con;
+          if(isset($_POST['remove_cart'])){
+            foreach($_POST['removeItem'] as $removeId){
+              echo $removeId;
+              $delete_query="delete from `cart_details` where product_id=$removeId";
+              $result_delete=mysqli_query($con,$delete_query);
+              if($result_delete){
+                echo "<script>window.open('cart.php','_self')</script>";
+              }
+            }
+          }
+        }
+        echo $removeitem=delete_cart_item();
+
+
+
+
+
+      ?>
 
 
         </div>
