@@ -109,6 +109,7 @@ include("functions/main_function.php");
           $product_title=$row_product_price['product_title'];
           $product_image1=$row_product_price['product_image1'];
           $product_values=array_sum($product_price);
+          $total_price=0;
           $total_price+=$product_values;
                 ?>
                 <tr>
@@ -154,7 +155,7 @@ include("functions/main_function.php");
                if($result_count>0){
                 echo "<h4 class='px-3 m-2'>Subtotal : KES <strong class='text-danger'> $total_price</strong>/= </h4>
                 <a href='shop.php'><button class='btn btn-outline-success px-3 py-2 mx-2' type='button' id='button-addon2'>Shop for more Products</button></a>
-                <a href='#'><button class='btn btn-outline-secondary px-3 py-2' type='button' id='button-addon2'>Proceed to Checkout</button></a>";
+                <a href='./users/checkout.php'><button class='btn btn-outline-secondary px-3 py-2' type='button' id='button-addon2'>Proceed to Checkout</button></a>";
                }
                else{
                 echo "<a href='shop.php'><button class='btn btn-outline-success px-3 py-2 mx-auto mb-3' type='button' id='button-addon2'>Shop for more Products</button></a>";

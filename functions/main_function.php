@@ -2,6 +2,7 @@
 
 include('./includes/connect.php');
 
+
 // function to fetch products from the database
 function getProducts(){
     global $con;

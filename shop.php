@@ -62,7 +62,7 @@ include("functions/main_function.php");
                     <a href="#" class="nav-link mx-2 text-white fs-5">Welcome Guest</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link mx-2 text-white fs-5">Login</a>
+                    <a href="./users/user_login.php" class="nav-link mx-2 text-white fs-5">Login</a>
                 </li>
                 
             </ul>
