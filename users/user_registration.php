@@ -1,3 +1,9 @@
+<?php
+include('../includes/connect.php');
+include('../functions/main_function.php');
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +32,8 @@
         <h2 class="text-center mt-2">User Registration</h2>
         <div class="row d-flex align-items-center justify-content-center">
             <div class="col-lg-12 col-xl-6">
-                <form action="" method="post" enctype="multipart/form-data" >
+                <!-- enctype is used because I am inserting an image to the database -->
+                <form action="" method="POST" enctype="multipart/form-data" >
                     <!-- username field -->
                 <div class="form-outline mb-3">
                     <label for="username" class="form-label">Username</label>
@@ -64,7 +71,7 @@
                 </div>
                 <!-- Register button -->
                 <div class="mt-4 pt-2">
-                    <input type="button" value="Register" class="btn btn-outline-success px-4 py-2" name="user_register">
+                    <input type="submit" value="Register" class="btn btn-outline-success px-4 py-2" name="user_register">
                     <p class="mt-2 small fw-bold mb-0">Already have an account? <a href="user_login.php" class="text-danger text-decoration-none" >Login</a></p>
                 </div>
                 </form>
@@ -74,3 +81,42 @@
     
 </body>
 </html>
+<?php
+if(isset($_POST['user_register'])){
+    $username=$_POST['user_username'];
+    $contact=$_POST['user_usercontact'];
+    $useremail=$_POST['user_useremail'];
+    $userpass=$_POST['user_userpass'];
+    $user_Confuserpass=$_POST['user_Confuserpass'];
+    $userimage=$_FILES['user_userimage']['name'];
+    $userimageTmp=$_FILES['user_userimage']['tmp_name'];
+    $user_useraddress=$_POST['user_useraddress'];
+    $user_ip=getIPAddress();
+
+    // select query to check if user already exists
+    $select_query="select * from `user_table` where user_name='$username' or user_email='$useremail'";
+    $sql_exc=mysqli_query($con,$select_query);
+    $rowCount=mysqli_num_rows($sql_exc);
+    // Variable rowcount to store the number of rows
+    if($rowCount > 0){
+        echo "<script>alert('Username and Email Already Exists in the Database')</script>"; 
+        // check if passwords match
+    }elseif($userpass!=$user_Confuserpass){
+        echo "<script>alert('Passwords do not match!')</script>";
+    }
+    else{
+    //  Insert query
+    // function to move uploaded images to a new directory in the users area. params(Temp file name,(enclose in double quotes)path to move image/image to move)
+    move_uploaded_file($userimageTmp,"./upImages/$userimage");
+    $insert_query="insert into `user_table`(user_name,user_contact,user_email,user_password,user_image,user_ipaddress,user_address)
+    values('$username','$contact','$useremail','$userpass','$userimage',' $user_ip','$user_useraddress')";
+    $sql_query=mysqli_query($con,$insert_query);
+    if($sql_query){
+        echo "<script>alert('Data inserted successfully')</script>";
+    }else{
+        die(mysqli_error($con));
+    }
+}
+}
+
+?>

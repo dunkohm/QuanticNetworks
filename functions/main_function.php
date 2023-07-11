@@ -1,6 +1,6 @@
 <?php
 
-include('./includes/connect.php');
+// include('./includes/connect.php');
 
 
 // function to fetch products from the database
