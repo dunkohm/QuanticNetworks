@@ -1,9 +1,7 @@
 <?php
 include('../includes/connect.php');
 include('../functions/main_function.php');
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,6 +85,7 @@ if(isset($_POST['user_register'])){
     $contact=$_POST['user_usercontact'];
     $useremail=$_POST['user_useremail'];
     $userpass=$_POST['user_userpass'];
+    $hashpass=password_hash($userpass,PASSWORD_DEFAULT);//Password hash method
     $user_Confuserpass=$_POST['user_Confuserpass'];
     $userimage=$_FILES['user_userimage']['name'];
     $userimageTmp=$_FILES['user_userimage']['tmp_name'];
@@ -109,7 +108,7 @@ if(isset($_POST['user_register'])){
     // function to move uploaded images to a new directory in the users area. params(Temp file name,(enclose in double quotes)path to move image/image to move)
     move_uploaded_file($userimageTmp,"./upImages/$userimage");
     $insert_query="insert into `user_table`(user_name,user_contact,user_email,user_password,user_image,user_ipaddress,user_address)
-    values('$username','$contact','$useremail','$userpass','$userimage',' $user_ip','$user_useraddress')";
+    values('$username','$contact','$useremail','$hashpass','$userimage',' $user_ip','$user_useraddress')";//add $hashpass to db instead of $userpass
     $sql_query=mysqli_query($con,$insert_query);
     if($sql_query){
         echo "<script>alert('Data inserted successfully')</script>";
