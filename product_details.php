@@ -9,7 +9,6 @@ include("functions/main_function.php");
 <?php
   cart();
   ?>
-
 <head>
     <title>Quantic Shop</title>
     <!-- Required meta tags -->

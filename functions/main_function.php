@@ -1,8 +1,4 @@
 <?php
-
-// include('./includes/connect.php');
-
-
 // function to fetch products from the database
 function getProducts(){
     global $con;
@@ -23,13 +19,14 @@ function getProducts(){
        $brand_id=$row['brand_id'];
     //   display products
        echo "<div class='col-md-4 mb-2'>
-       <div class='card text-center mb-3'>
+       <div class='card text-center mb-3 border-0 shadow'>
          <img src='adminControl/product-images/$product_image1' class='card-img-center' alt='$product_title'>
          <div class='card-body'>
            <h5 class='card-title'>$product_title</h5>
-           <p class='card-text'>$product_description</p>
-           <a href='shop.php?add_to_cart=$product_id' class='btn bg btn-outline-success'>Add to cart</a>
-           <a href='product_details.php?product_id=$product_id' class='btn btn-outline-success'>View more</a>
+           <p class='card-text text-center'>$product_description</p>
+           <h5 class=' card-text text-center text-dark '> KES $product_price</h5>
+           <a href='shop.php?add_to_cart=$product_id' class='btn bg btn-outline-primary'>Add to cart</a>
+           <a href='product_details.php?product_id=$product_id' class='btn btn-outline-warning'>View more</a>
          </div>
        </div>
      </div>";
@@ -51,7 +48,7 @@ function get_unique_Categories(){
     //  checks number of products in a category and if none displays message
      $number_of_rows=mysqli_num_rows($result_query);
      if($number_of_rows==0){
-        echo "<h1 class='text-danger  p-5'>Sorry! No products for this category</h1>";
+        echo "<h1 class='text-primary  p-5'>Sorry! No products for this category</h1>";
      }
     //  while loop
      while($row=mysqli_fetch_assoc($result_query)){
@@ -63,17 +60,18 @@ function get_unique_Categories(){
        $category_id=$row['category_id'];
        $brand_id=$row['brand_id'];
     //   display products
-       echo "<div class='col-md-4 mb-2'>
-       <div class='card text-center'>
-         <img src='adminControl/product-images/$product_image1' class='card-img-center' alt='$product_title'>
-         <div class='card-body'>
-           <h5 class='card-title'>$product_title</h5>
-           <p class='card-text'>$product_description</p>
-           <a href='shop.php?add_to_cart=$product_id' class='btn bg btn-outline-success'>Add to cart</a>
-           <a href='product_details.php?product_id= $product_id' class='btn btn-outline-success'>View more</a>
-         </div>
-       </div>
-     </div>";
+      echo "<div class='col-md-4 mb-2'>
+      <div class='card text-center'>
+        <img src='adminControl/product-images/$product_image1' class='card-img-center' alt='$product_title'>
+        <div class='card-body'>
+          <h5 class='card-title'>$product_title</h5>
+          <p class='card-text'>$product_description</p>
+          <h5 class=' card-text text-center text-dark '> KES $product_price</h5>
+          <a href='shop.php?add_to_cart=$product_id' class='btn bg btn-outline-primary'>Add to cart</a>
+          <a href='product_details.php?product_id= $product_id' class='btn btn-outline-warning'>View more</a>
+        </div>
+      </div>
+    </div>";
     }
   }
 }
@@ -88,34 +86,34 @@ function get_unique_Brands(){
           $brand_id=$_GET['brand'];
    // query
    $select_query="select * from `products` where brand_id=$brand_id";
-   $result_query=mysqli_query($con,$select_query);
+  $result_query=mysqli_query($con,$select_query);
    //  checks number of products in a brand and if none displays message
-   $number_of_rows=mysqli_num_rows($result_query);
-   if($number_of_rows==0){
-      echo "<h1 class='text-danger p-5'>Sorry! No products for this Brand</h1>";
-       }
+  $number_of_rows=mysqli_num_rows($result_query);
+  if($number_of_rows==0){
+      echo "<h1 class='text-danger p-5'>Sorry! No products for this Brand</h1>";}
      //  while loop
-   while($row=mysqli_fetch_assoc($result_query)){
-     $product_id=$row['product_id'];
-     $product_title=$row['product_title'];
-     $product_description=$row['product_description'];
-     $product_image1=$row['product_image1'];
-     $product_price=$row['product_price'];
-     $category_id=$row['category_id'];
-     $brand_id=$row['brand_id'];
+  while($row=mysqli_fetch_assoc($result_query)){
+    $product_id=$row['product_id'];
+    $product_title=$row['product_title'];
+    $product_description=$row['product_description'];
+    $product_image1=$row['product_image1'];
+    $product_price=$row['product_price'];
+    $category_id=$row['category_id'];
+    $brand_id=$row['brand_id'];
       //   display products
-     echo "<div class='col-md-4 mb-2'>
-     <div class='card text-center'>
-       <img src='adminControl/product-images/$product_image1' class='card-img-center' alt='$product_title'>
-       <div class='card-body'>
-         <h5 class='card-title'>$product_title</h5>
-         <p class='card-text'>$product_description</p>
-         <a href='shop.php?add_to_cart=$product_id' class='btn bg  btn-outline-success'>Add to cart</a>
-         <a href='product_details.php?product_id= $product_id' class='btn btn-outline-success'>View more</a>
+    echo "<div class='col-md-4 mb-2'>
+    <div class='card text-center'>
+      <img src='adminControl/product-images/$product_image1' class='card-img-center' alt='$product_title'>
+      <div class='card-body'>
+        <h5 class='card-title'>$product_title</h5>
+        <p class='card-text'>$product_description</p>
+        <h5 class=' card-text text-center text-dark '> KES $product_price</h5>
+        <a href='shop.php?add_to_cart=$product_id' class='btn bg  btn-outline-success'>Add to cart</a>
+        <a href='product_details.php?product_id= $product_id' class='btn btn-outline-success'>View more</a>
           </div>
         </div>
       </div>";
-     }
+    }
   }
 }
 // This is the function to fetch brands from the db.
@@ -173,13 +171,14 @@ function searchProducts(){
      $brand_id=$row['brand_id'];
   //   display products
      echo "<div class='col-md-4 mb-2'>
-     <div class='card text-center'>
+     <div class='card text-center border-0 shadow'>
        <img src='adminControl/product-images/$product_image1' class='card-img-center' alt='$product_title'>
        <div class='card-body'>
          <h5 class='card-title'>$product_title</h5>
-         <p class='card-text'>$product_description</p>
-         <a href='shop.php?add_to_cart=$product_id' class='btn bg btn-outline-success'>Add to cart</a>
-         <a href='product_details.php?product_id= $product_id' class='btn btn-outline-success'>View more</a>
+         <p class='card-text text-center'>$product_description</p>
+         <h5 class=' card-text text-center text-dark '> KES $product_price</h5>
+         <a href='shop.php?add_to_cart=$product_id' class='btn bg btn-outline-primary'>Add to cart</a>
+         <a href='product_details.php?product_id= $product_id' class='btn btn-outline-warning'>View more</a>
        </div>
      </div>
    </div>";
@@ -206,14 +205,15 @@ function get_all_products(){
        $category_id=$row['category_id'];
        $brand_id=$row['brand_id'];
     //   display products
-       echo "<div class='col-md-4 mb-2'>
-       <div class='card text-center'>
+       echo "<div class='col-md-4 mb-2 mt-2'>
+       <div class='card text-center mt-3 border-0 shadow'>
          <img src='adminControl/product-images/$product_image1' class='card-img-center' alt='$product_title'>
          <div class='card-body'>
            <h5 class='card-title'>$product_title</h5>
            <p class='card-text'>$product_description</p>
-           <a href='shop.php?add_to_cart=$product_id' class='btn bg btn-outline-success'>Add to cart</a>
-           <a href='product_details.php?product_id= $product_id' class='btn btn-outline-success'>View more</a>
+           <h5 class=' card-text text-center text-dark '> KES $product_price</h5>
+           <a href='shop.php?add_to_cart=$product_id' class='btn bg btn-outline-primary'>Add to cart</a>
+           <a href='product_details.php?product_id= $product_id' class='btn btn-outline-warning'>View more</a>
          </div>
        </div>
      </div>";
