@@ -381,7 +381,7 @@ include("functions/main_function.php");
                                 <?php   }
                       }}
                         else{
-                          echo "<h2 class='text-center text-danger'>Your cart is Empty!</h2>";
+                          echo "<h2 class='text-center text-primary'>Your cart is Empty!</h2>";
                         }
                       ?>
                               </tbody>

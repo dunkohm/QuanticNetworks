@@ -18,14 +18,34 @@ if(isset($_POST['insert-brand'])){
 }}
 
 ?>
-<h2 class="text-center small-header">Insert Brands</h2>
-<!-- brands input form -->
-<form action="" method="post" class="mb-2">
-<div class="input-group w-90 mb-2">
-  <span class="input-group-text bg text-light" id="basic-addon1">Brands</span>
-  <input type="text" class="form-control w-50" placeholder=" insert Brand"name="brand-title" aria-label="Brands">
-</div>
-<div class="input-group w-10 mb-2 m-auto">
-    <input type="submit" value="Insert Brand" class="border-0 p-2 my-3 bg text-light" name="insert-brand">
-</div>
+<div class="container-fluid align-items-center justify-content-center">
+    <!-- brands input form -->
+<form action="" method="post" class="mb-2 mt-5">
+    <h2 class="text-center text-primary">Insert Brands</h2>
+    <div class="input-group mb-2 mt-3">
+    <span class="input-group-text bg-secondary text-light" id="basic-addon1">Brands</span>
+    <input type="text" class="form-control" placeholder=" insert Brand"name="brand-title" aria-label="Brands">
+    </div>
+    <div class="input-group mb-2 mt-3 d-grid">
+        <input type="submit" value="Insert Brand" class="btn btn-primary text-light" name="insert-brand">
+    </div>
 </form>
+<div class="card mb-4 shadow-sm mt-5">
+  <div class="card-body">
+    <div class="row text-center">
+      <div class="col-4 border-end">
+        <h3 class="mb-0">24</h3>
+        <small class="text-muted">Categories</small>
+      </div>
+      <div class="col-4 border-end">
+        <h3 class="mb-0">156</h3>
+        <small class="text-muted">Products</small>
+      </div>
+      <div class="col-4">
+        <h3 class="mb-0">8</h3>
+        <small class="text-muted">Brands</small>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

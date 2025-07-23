@@ -1,5 +1,5 @@
 <?php
- include("admin-header.php");
+//  include("admin-header.php");
  include("../includes/connect.php");
  if(isset($_POST['insert_product'])){
     $product_title=$_POST['product_title'];
@@ -57,32 +57,33 @@
 </head>
 
 <body class="bg-light">
+   
     <!-- adminpage header -->
- <div class="container text-center ">
-    <h2 class="small-header mb-4">Add new product</h2>
+ <div class="container-fluid d-flex align-items-center justify-content-center">
     <!-- form -->
     <!-- you have to add the enctype attribute to insert files that are not in text format eg. Images,videos -->
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="" method="post" enctype="multipart/form-data" class="mt-4">
+        <h3 class="text-primary text-center mt-4">Add new product</h3>
         <!-- product-title -->
-        <div class="form-outline mb-4 w-50 m-auto">
-            <label for="product_title"class="form-label ">Product Title</label>
+        <div class="form-outline mb-4 m-auto">
+            <label for="product_title"class="form-label lead ">Product Title</label>
             <input type="text" name="product_title" id="product_title" class="form-control"
              placeholder="Enter Product title" autocomplete="off" required="required">
         </div>
         <!-- product description -->
-        <div class="form-outline mb-4 w-50 m-auto">
-            <label for="product_description"class="form-label ">Product Description</label>
+        <div class="form-outline mb-4 m-auto">
+            <label for="product_description"class="form-label lead ">Product Description</label>
             <input type="text" name="product_description" id="product_description" class="form-control"
              placeholder="Enter Product Description" autocomplete="off" required="required">
         </div>
         <!-- product keyword -->
-        <div class="form-outline mb-4 w-50 m-auto">
-            <label for="product_keywords"class="form-label ">Product keyword</label>
+        <div class="form-outline mb-4 m-auto">
+            <label for="product_keywords"class="form-label lead ">Product keyword</label>
             <input type="text" name="product_keywords" id="product_keywords" class="form-control"
              placeholder="Enter Product keywords" autocomplete="off" required="required">
         </div>
         <!-- categories -->
-        <div class="form-outline mb-4 w-50 m-auto">
+        <div class="form-outline mb-4 m-auto">
             <select name="product_category" id="" class="form-select">
                 <option value="">Select a category</option>
                 <!-- Code to select brand data from the database -->
@@ -101,7 +102,7 @@
             </select>
         </div>
         <!-- Brands -->
-        <div class="form-outline mb-4 w-50 m-auto">
+        <div class="form-outline mb-4 m-auto">
             <select name="product_brand" id="" class="form-select">
                 <option value="">Select a Brand</option>
                 <!-- Code to select brand data from the database -->
@@ -121,32 +122,32 @@
             </select>
         </div>
         <!-- image 1 -->
-        <div class="form-outline mb-4 w-50 m-auto">
-            <label for="product_image1"class="form-label">Product Image 1</label>
+        <div class="form-outline mb-4 m-auto">
+            <label for="product_image1"class="form-label lead">Product Image 1</label>
             <input type="file" name="product_image1" id="product_image1" class="form-control"
              required="required">
         </div>
         <!-- image 2 -->
-        <div class="form-outline mb-4 w-50 m-auto">
-            <label for="product_image2"class="form-label ">Product Image 2</label>
+        <div class="form-outline mb-4 m-auto">
+            <label for="product_image2"class="form-label lead ">Product Image 2</label>
             <input type="file" name="product_image2" id="product_image2" class="form-control"
              required="required">
         </div>
         <!-- image 3 -->
-        <div class="form-outline mb-4 w-50 m-auto">
-            <label for="product_image3"class="form-label ">Product Image 3</label>
+        <div class="form-outline mb-4 m-auto">
+            <label for="product_image3"class="form-label lead ">Product Image 3</label>
             <input type="file" name="product_image3" id="product_image3" class="form-control"
              required="required">
         </div>
          <!-- product Price -->
-         <div class="form-outline mb-4 w-50 m-auto">
-            <label for="product_price"class="form-label ">Product Price</label>
+         <div class="form-outline mb-4 m-auto">
+            <label for="product_price"class="form-label lead ">Product Price</label>
             <input type="text" name="product_price" id="product_price" class="form-control"
              placeholder="Enter Product Price" autocomplete="off" required="required">
         </div>
          <!-- Insert product button -->
-         <div class="form-outline mb-4 w-50 m-auto">
-            <input type="submit" value="Insert Product" class="btn bg btn-outline-success text-light" name="insert_product">
+         <div class="form-outline mb-4 d-grid m-auto">
+            <input type="submit" value="Insert Product" class="btn btn-primary text-light" name="insert_product">
         </div>
     </form>
  </div>
