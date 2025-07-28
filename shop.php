@@ -1,14 +1,14 @@
 <?php 
-// include("shop-header.php");
-include("includes/connect.php");
-include("functions/main_function.php");
+  // include("shop-header.php");
+  include("includes/connect.php");
+  include("functions/main_function.php");
 ?>
 <!doctype html>
 <html lang="en">
 <!-- calling the cart function -->
 <?php
   cart();
-  ?>
+?>
 <head>
     <title>Quantic Shop</title>
     <!-- Required meta tags -->
@@ -265,192 +265,191 @@ include("functions/main_function.php");
 </head>
 
 <body class="bg-light">
-<!-- Responsive Navigation Bar -->
-  <?php include("partials/navigation.php") ?>
+  <!-- Responsive Navigation Bar -->
+    <?php include("partials/navigation.php") ?>
 
-    <!-- Navigation Bar -->
-  <div class="container-fluid mb-3">
-    <nav class="navbar navbar-expand-md navbar-light fixed-top">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="shop.php">
-                <img src="imgs/Quantic Networks SYMBOL.png" alt="Quantic Networks" class="navbar-logo-symbol me-2">
-                <span class="navbar-logo-text">Quantic Networks</span>
+  <!-- Navigation Bar -->
+    <div class="container-fluid mb-3">
+      <nav class="navbar navbar-expand-md navbar-light fixed-top">
+          <div class="container">
+              <a class="navbar-brand d-flex align-items-center" href="shop.php">
+                  <img src="imgs/Quantic Networks SYMBOL.png" alt="Quantic Networks" class="navbar-logo-symbol me-2">
+                  <span class="navbar-logo-text">Quantic Networks</span>
+              </a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                  <ul class="navbar-nav ms-auto">
+                      <li class="nav-item">
+                          <a class="nav-link active" href="shop.php">Home</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="display_all_products.php">Products</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="cart.php"><p><i class="bi bi-bag-fill"></i><small class="text-primary"> <?php cart_items();?></small></p></a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="display_all_products.php">Total Price : Kes <span class="text-primary"><?php total_price();?> /=</span></a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="./users/user_login.php"><i class="bi bi-person-fill"></i> Login</a>
+                      </li>
+                      <li class="nav-item d-flex align-items-bottom">
+                          <a href="#"><i class="bi bi-whatsapp mx-3 fs-5"></i></a>
+                          <a href="#"><i class="bi bi-facebook mx-3 fs-5"></i></a>
+                          <a href="#"><i class="bi bi-instagram  mx-3 fs-5"></i></a> 
+                          <a href="#" style="text-decoration: none;"><i class="bi bi-telephone-fill mx-3 fs-5"></i><strong>(+254) 114 063 049</strong></a>
+                    
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </nav>
+    </div>
+    <main>
+      <section class="hero">
+        <div class="blob"></div>
+        <div class="container position-relative z-2">
+          <h1 class="display-4 fw-bold">
+            Your One-Stop Shop for <br />
+            <span>Tech & Networking Gear</span>
+          </h1>
+          <p class="lead mt-3">
+            Explore our wide range of computers, CCTV, software, routers, and more for both personal and business use.
+          </p>
+          <div class="mt-4">
+            <a href="display_all_products.php" class="btn btn-shop">
+              Shop Now <i class="bi bi-arrow-right ms-2"></i>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="shop.php">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="display_all_products.php">Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="cart.php"><p><i class="bi bi-bag-fill"></i><small class="text-primary"> <?php cart_items();?></small></p></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="display_all_products.php">Total Price : Kes <span class="text-primary"><?php total_price();?> /=</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./users/user_login.php"><i class="bi bi-person-fill"></i> Login</a>
-                    </li>
-                    <li class="nav-item d-flex align-items-bottom">
-                        <a href="#"><i class="bi bi-whatsapp mx-3 fs-5"></i></a>
-                        <a href="#"><i class="bi bi-facebook mx-3 fs-5"></i></a>
-                        <a href="#"><i class="bi bi-instagram  mx-3 fs-5"></i></a> 
-                        <a href="#" style="text-decoration: none;"><i class="bi bi-telephone-fill mx-3 fs-5"></i><strong>(+254) 114 063 049</strong></a>
-                  
-                    </li>
-                </ul>
+          </div>
+          <div class="floating-icons d-flex justify-content-center flex-wrap gap-3">
+          <span>💻</span>
+          <span>🖨️</span>
+          <span>📡</span>
+          <span>📷</span>
+          <span>🔑</span>
+          <span>🎧</span>
+          <span>🖱️</span>
+          <span>💾</span>
+          <span>🧠</span>
+          <span>🧮</span>
+        </div>
+        </div>
+
+        
+      </section>
+      <div class="container container-fluid bg-light p-0">
+        <div class="row">
+          <div class="products-header text-center p-2">
+            <h2 class="navbar-logo-text" style="font-size: 2.0rem;">Products</h2>
+            <p class="text-label lead">Here are some of the Products we offer...</p>
+          </div>
+          <!-- search area -->
+          <form class="search" action="search_product.php" method="get">
+            <div class="input-group mb-2 p-2 shadow">
+              <input type="text" class="form-control border-primary border-3" placeholder="Search for a product or brand" name="search_data" aria-label="Search"
+                aria-describedby="button-addon2">
+              <!-- <button class="btn btn-outline-success" type="button" id="button-addon2">Search</button> -->
+              <button type="submit" name="search_data_product" class="btn btn-warning border-warning border-3">
+                <i class="bi bi-search me-2"></i> Search
+              </button>
             </div>
-        </div>
-    </nav>
-  </div>
-  <main>
-  <section class="hero">
-    <div class="blob"></div>
-    <div class="container position-relative z-2">
-      <h1 class="display-4 fw-bold">
-        Your One-Stop Shop for <br />
-        <span>Tech & Networking Gear</span>
-      </h1>
-      <p class="lead mt-3">
-        Explore our wide range of computers, CCTV, software, routers, and more for both personal and business use.
-      </p>
-      <div class="mt-4">
-        <a href="display_all_products.php" class="btn btn-shop">
-          Shop Now <i class="bi bi-arrow-right ms-2"></i>
-        </a>
-      </div>
-      <div class="floating-icons d-flex justify-content-center flex-wrap gap-3">
-      <span>💻</span>
-      <span>🖨️</span>
-      <span>📡</span>
-      <span>📷</span>
-      <span>🔑</span>
-      <span>🎧</span>
-      <span>🖱️</span>
-      <span>💾</span>
-      <span>🧠</span>
-      <span>🧮</span>
-    </div>
-    </div>
-
-    
-  </section>
-    <div class="container container-fluid bg-light p-0">
-      <div class="row">
-        <div class="products-header text-center p-2">
-          <h2 class="navbar-logo-text" style="font-size: 2.0rem;">Products</h2>
-          <p class="text-label">Here are some of the Products we offer...</p>
-        </div>
-        <!-- search area -->
-        <form class="search" action="search_product.php" method="get">
-          <div class="input-group mb-2 p-2 shadow">
-            <input type="text" class="form-control border-primary border-3" placeholder="Search for a product or brand" name="search_data" aria-label="Search"
-              aria-describedby="button-addon2">
-            <!-- <button class="btn btn-outline-success" type="button" id="button-addon2">Search</button> -->
-            <button type="submit" name="search_data_product" class="btn btn-warning border-warning border-3">
-              <i class="bi bi-search me-2"></i> Search
-            </button>
+          </form>
+          <div class="col-md-10 mt-3">
+            <div class="row px-1">
+              <!-- Calling function to fetch products from the database -->
+            <?php 
+            getProducts();
+            get_unique_Categories();
+            get_unique_Brands();
+              ?>
+            </div>
           </div>
-        </form>
-        <div class="col-md-10 mt-3">
-          <div class="row px-1">
-            <!-- Calling function to fetch products from the database -->
-          <?php 
-          getProducts();
-          get_unique_Categories();
-          get_unique_Brands();
-            ?>
+
+          <div class="col-md-2 p-0 mt-3" style="background-color: rgba(96, 130, 255, 0.6);">
+            <!-- products to be displayed -->
+            <ul class="navbar-nav me-auto text-center">
+              <li class="nav-item bg-warning">
+                <a href="#" class="nav-link text-light">
+                  <h5>Shop By Categories</h5>
+                </a>
+              </li>
+            <!-- Calling function to fetch Categories from db and display on side nav -->
+              <?php 
+              getCategories();
+              ?>
+            </ul>
+            <!-- brands to be displayed -->
+            <ul class="navbar-nav me-auto text-center">
+              <li class="nav-item bg-warning">
+                <a href="#" class="nav-link text-light">
+                  <h4>Shop By Brands</h4>
+                </a>
+              </li>
+              <!-- Calling function to fetch Brands from db and display on side nav -->
+              <?php 
+              getBrands();
+              
+              ?>
+            </ul>
           </div>
         </div>
+      </div>
+    </main>
+    <footer class="footer mt-5 text-white pt-5 pb-4 position-relative">
+      <!-- Background animation blob -->
+      <div class="footer-blob"></div>
+      <div class="container">
+        <div class="row text-center text-md-start">
+          <!-- About / Info -->
+          <div class="col-md-3 mb-4">
+            <h5 class="text-uppercase fw-bold">About Us</h5>
+            <p>We offer the best deals on tech and networking equipment for individuals and businesses across Kenya.</p>
+          </div>
 
-        <div class="col-md-2 p-0 mt-3" style="background-color: rgba(96, 130, 255, 0.6);">
-          <!-- products to be displayed -->
-          <ul class="navbar-nav me-auto text-center">
-            <li class="nav-item bg-warning">
-              <a href="#" class="nav-link text-light">
-                <h5>Shop By Categories</h5>
-              </a>
-            </li>
-          <!-- Calling function to fetch Categories from db and display on side nav -->
-            <?php 
-            getCategories();
-            ?>
-          </ul>
-          <!-- brands to be displayed -->
-          <ul class="navbar-nav me-auto text-center">
-            <li class="nav-item bg-warning">
-              <a href="#" class="nav-link text-light">
-                <h4>Shop By Brands</h4>
-              </a>
-            </li>
-            <!-- Calling function to fetch Brands from db and display on side nav -->
-            <?php 
-            getBrands();
-            
-            ?>
-          </ul>
+          <!-- Policies -->
+          <div class="col-md-3 mb-4">
+            <h5 class="text-uppercase fw-bold">Policies</h5>
+            <ul class="list-unstyled">
+              <li><a href="#" class="footer-link">Terms & Conditions</a></li>
+              <li><a href="#" class="footer-link">Privacy Policy</a></li>
+              <li><a href="#" class="footer-link">Return Policy</a></li>
+            </ul>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="col-md-3 mb-4">
+            <h5 class="text-uppercase fw-bold">Quick Links</h5>
+            <ul class="list-unstyled">
+              <li><a href="#" class="footer-link">FAQs</a></li>
+              <li><a href="#" class="footer-link">Contact Us</a></li>
+              <li><a href="#" class="footer-link">Support</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact / Location -->
+          <div class="col-md-3 mb-4">
+            <h5 class="text-uppercase fw-bold">Visit Us</h5>
+            <p>Nairobi Kasarani,<br>3rd Floor, Sunton Business Center</p>
+            <p><strong>Hours:</strong><br>Mon - Sat: 9:00AM - 6:00PM</p>
+            <p><i class="bi bi-telephone-fill"></i> +254 114 063049</p>
+          </div>
+        </div>
+
+        <div class="text-center mt-4 border-top pt-3" style="border-color: rgba(255, 255, 255, 0.2);">
+          <p class="mb-0">&copy; 2025 Quantic Networks Kenya. All rights reserved.</p>
         </div>
       </div>
-    </div>
-  </main>
-  <footer class="footer mt-5 text-white pt-5 pb-4 position-relative">
-  <!-- Background animation blob -->
-  <div class="footer-blob"></div>
+  </footer>
 
-  <div class="container">
-    <div class="row text-center text-md-start">
-      <!-- About / Info -->
-      <div class="col-md-3 mb-4">
-        <h5 class="text-uppercase fw-bold">About Us</h5>
-        <p>We offer the best deals on tech and networking equipment for individuals and businesses across Kenya.</p>
-      </div>
-
-      <!-- Policies -->
-      <div class="col-md-3 mb-4">
-        <h5 class="text-uppercase fw-bold">Policies</h5>
-        <ul class="list-unstyled">
-          <li><a href="#" class="footer-link">Terms & Conditions</a></li>
-          <li><a href="#" class="footer-link">Privacy Policy</a></li>
-          <li><a href="#" class="footer-link">Return Policy</a></li>
-        </ul>
-      </div>
-
-      <!-- Quick Links -->
-      <div class="col-md-3 mb-4">
-        <h5 class="text-uppercase fw-bold">Quick Links</h5>
-        <ul class="list-unstyled">
-          <li><a href="#" class="footer-link">FAQs</a></li>
-          <li><a href="#" class="footer-link">Contact Us</a></li>
-          <li><a href="#" class="footer-link">Support</a></li>
-        </ul>
-      </div>
-
-      <!-- Contact / Location -->
-      <div class="col-md-3 mb-4">
-        <h5 class="text-uppercase fw-bold">Visit Us</h5>
-        <p>Nairobi Kasarani,<br>3rd Floor, Sunton Business Center</p>
-        <p><strong>Hours:</strong><br>Mon - Sat: 9:00AM - 6:00PM</p>
-        <p><i class="bi bi-telephone-fill"></i> +254 114 063049</p>
-      </div>
-    </div>
-
-    <div class="text-center mt-4 border-top pt-3" style="border-color: rgba(255, 255, 255, 0.2);">
-      <p class="mb-0">&copy; 2025 Quantic Networks Kenya. All rights reserved.</p>
-    </div>
-  </div>
-</footer>
-
-  <!-- Bootstrap JavaScript Libraries -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
     </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
     integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
     </script>
 </body>

@@ -8,8 +8,8 @@ include('../functions/main_function.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User -Registration </title>
-     <!-- Bootstrap CSS -->
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -129,41 +129,32 @@ include('../functions/main_function.php');
 </head>
 <body>
     <div class="container-fluid m-0 p-0">
-         <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="#">
-                <img src="../imgs/Quantic Networks SYMBOL.png" alt="Quantic Networks" class="navbar-logo-symbol me-2">
-                <span class="navbar-logo-text">Quantic Networks</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#services">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="shop.php">Shop</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact Us</a>
-                    </li>
-                </ul>
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="#">
+                    <img src="../imgs/Quantic Networks SYMBOL.png" alt="Quantic Networks" class="navbar-logo-symbol me-2">
+                    <span class="navbar-logo-text">Quantic Networks</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="../shop.php">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">Contact Us <span>(+254) 114063049</span></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
     </div>
-        <div class="container-fluid my-5 p-0 mt-5">
+    <div class="container-fluid my-5 p-0 mt-5">
         <div class="row d-flex align-items-center justify-content-center">
-             <h2 class="text-center mt-5 navbar-logo-text">User Registration</h2>
+            <h2 class="text-center mt-5 navbar-logo-text">User Registration</h2>
             <div class="col-lg-12 col-xl-6">
                 <!-- enctype is used because I am inserting an image to the database -->
                 <form action="" method="POST" enctype="multipart/form-data" class="mx-5" >
@@ -211,46 +202,45 @@ include('../functions/main_function.php');
             </div>
         </div>
     </div>
-    
 </body>
 </html>
+<!-- php logic -->
 <?php
-if(isset($_POST['user_register'])){
-    $username=$_POST['user_username'];
-    $contact=$_POST['user_usercontact'];
-    $useremail=$_POST['user_useremail'];
-    $userpass=$_POST['user_userpass'];
-    $hashpass=password_hash($userpass,PASSWORD_DEFAULT);//Password hash method
-    $user_Confuserpass=$_POST['user_Confuserpass'];
-    $userimage=$_FILES['user_userimage']['name'];
-    $userimageTmp=$_FILES['user_userimage']['tmp_name'];
-    $user_useraddress=$_POST['user_useraddress'];
-    $user_ip=getIPAddress();
+    if(isset($_POST['user_register'])){
+        $username=$_POST['user_username'];
+        $contact=$_POST['user_usercontact'];
+        $useremail=$_POST['user_useremail'];
+        $userpass=$_POST['user_userpass'];
+        $hashpass=password_hash($userpass,PASSWORD_DEFAULT);//Password hash method
+        $user_Confuserpass=$_POST['user_Confuserpass'];
+        $userimage=$_FILES['user_userimage']['name'];
+        $userimageTmp=$_FILES['user_userimage']['tmp_name'];
+        $user_useraddress=$_POST['user_useraddress'];
+        $user_ip=getIPAddress();
 
-    // select query to check if user already exists
-    $select_query="select * from `user_table` where user_name='$username' or user_email='$useremail'";
-    $sql_exc=mysqli_query($con,$select_query);
-    $rowCount=mysqli_num_rows($sql_exc);
-    // Variable rowcount to store the number of rows
-    if($rowCount > 0){
-        echo "<script>alert('Username and Email Already Exists in the Database')</script>"; 
-        // check if passwords match
-    }elseif($userpass!=$user_Confuserpass){
-        echo "<script>alert('Passwords do not match!')</script>";
+        // select query to check if user already exists
+        $select_query="select * from `user_table` where user_name='$username' or user_email='$useremail'";
+        $sql_exc=mysqli_query($con,$select_query);
+        $rowCount=mysqli_num_rows($sql_exc);
+        // Variable rowcount to store the number of rows
+        if($rowCount > 0){
+            echo "<script>alert('Username and Email Already Exists in the Database')</script>"; 
+            // check if passwords match
+        }elseif($userpass!=$user_Confuserpass){
+            echo "<script>alert('Passwords do not match!')</script>";
+        }
+        else{
+        //  Insert query
+        // function to move uploaded images to a new directory in the users area. params(Temp file name,(enclose in double quotes)path to move image/image to move)
+        move_uploaded_file($userimageTmp,"./upImages/$userimage");
+        $insert_query="insert into `user_table`(user_name,user_contact,user_email,user_password,user_image,user_ipaddress,user_address)
+        values('$username','$contact','$useremail','$hashpass','$userimage',' $user_ip','$user_useraddress')";//add $hashpass to db instead of $userpass
+        $sql_query=mysqli_query($con,$insert_query);
+        if($sql_query){
+            echo "<script>alert('Data inserted successfully')</script>";
+        }else{
+            die(mysqli_error($con));
+        }
     }
-    else{
-    //  Insert query
-    // function to move uploaded images to a new directory in the users area. params(Temp file name,(enclose in double quotes)path to move image/image to move)
-    move_uploaded_file($userimageTmp,"./upImages/$userimage");
-    $insert_query="insert into `user_table`(user_name,user_contact,user_email,user_password,user_image,user_ipaddress,user_address)
-    values('$username','$contact','$useremail','$hashpass','$userimage',' $user_ip','$user_useraddress')";//add $hashpass to db instead of $userpass
-    $sql_query=mysqli_query($con,$insert_query);
-    if($sql_query){
-        echo "<script>alert('Data inserted successfully')</script>";
-    }else{
-        die(mysqli_error($con));
     }
-}
-}
-
 ?>

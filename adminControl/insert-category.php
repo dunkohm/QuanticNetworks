@@ -1,21 +1,21 @@
 <?php 
-include("../includes/connect.php");
-if(isset($_POST['insert-category'])){
-    $cat_title = $_POST['category-title'];
-    // code to avoid repetition of categories
-    $select_query ="select * from `categories` where category_title= '$cat_title'";
-    $result_query =mysqli_query($con,$select_query);
-    $number=mysqli_num_rows($result_query);
-    if($number >0){
-        echo"<script>alert('This category is already present in the database')</script>";
-    }else{
-    // code to insert category input to the database
-    $insert_query ="insert into `categories` (category_title) values ('$cat_title')";//mysql insert query
-    $result= mysqli_query($con,$insert_query);//execution
-    if($result){
-        echo "<script>alert('Category has been added successfully')</script>";
-    }
-}}
+  include("../includes/connect.php");
+  if(isset($_POST['insert-category'])){
+      $cat_title = $_POST['category-title'];
+      // code to avoid repetition of categories
+      $select_query ="select * from `categories` where category_title= '$cat_title'";
+      $result_query =mysqli_query($con,$select_query);
+      $number=mysqli_num_rows($result_query);
+      if($number >0){
+          echo"<script>alert('This category is already present in the database')</script>";
+      }else{
+      // code to insert category input to the database
+      $insert_query ="insert into `categories` (category_title) values ('$cat_title')";//mysql insert query
+      $result= mysqli_query($con,$insert_query);//execution
+      if($result){
+          echo "<script>alert('Category has been added successfully')</script>";
+      }
+  }}
 ?>
 
 <!-- Category input form -->
