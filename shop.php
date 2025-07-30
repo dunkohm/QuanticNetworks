@@ -2,6 +2,7 @@
   // include("shop-header.php");
   include("includes/connect.php");
   include("functions/main_function.php");
+  session_start();
 ?>
 <!doctype html>
 <html lang="en">
@@ -14,7 +15,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    
     <!-- Bootstrap CSS -->
     <link rel="icon" type="image/png" href="imgs/Quantic Networks SYMBOL.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
@@ -293,9 +294,27 @@
                       <li class="nav-item">
                           <a class="nav-link" href="display_all_products.php">Total Price : Kes <span class="text-primary"><?php total_price();?> /=</span></a>
                       </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="./users/user_login.php"><i class="bi bi-person-fill"></i> Login</a>
-                      </li>
+                    
+                      <?php
+                      if(!isset($_SESSION['username'])){
+                        echo " <li class='nav-item'>
+                          <a class='nav-link' href='#'></i> Welcome Guest</a>
+                      </li>";
+                      }else{
+                        echo " <li class='nav-item'>
+                          <a class='nav-link' href='#'></i> Welcome ".$_SESSION['username']."</a>
+                      </li>"; }
+
+                      if(!isset($_SESSION['username'])){
+                        echo " <li class='nav-item'>
+                          <a class='nav-link' href='./users/user_login.php'><i class='bi bi-person-fill'></i> Login</a>
+                      </li>";
+                      }else{
+                        echo " <li class='nav-item'>
+                          <a class='nav-link' href='./users/logout.php'>Logout</a>
+                      </li>";
+                      }
+                      ?>                  
                       <li class="nav-item d-flex align-items-bottom">
                           <a href="#"><i class="bi bi-whatsapp mx-3 fs-5"></i></a>
                           <a href="#"><i class="bi bi-facebook mx-3 fs-5"></i></a>

@@ -2,19 +2,48 @@
 // include("shop-header.php");
 include("includes/connect.php");
 include("functions/main_function.php");
-
+  cart();
+  session_start();
+  // Handle form submissions first
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $get_ip = getIPAddress();
+    
+    // Update quantities
+    if (isset($_POST['update_cart'])) {
+        foreach ($_POST['qty'] as $product_id => $quantity) {
+            if (is_numeric($quantity) && $quantity > 0) {
+                $update_query = "UPDATE `cart_details` 
+                                SET quantity = $quantity 
+                                WHERE ip_address = '$get_ip' 
+                                AND product_id = $product_id";
+                mysqli_query($con, $update_query);
+            }
+        }
+    }
+    
+    // Remove items
+    if (isset($_POST['remove_cart'])) {
+        foreach ($_POST['removeItem'] as $product_id) {
+            $delete_query = "DELETE FROM `cart_details` 
+                            WHERE ip_address = '$get_ip' 
+                            AND product_id = $product_id";
+            mysqli_query($con, $delete_query);
+        }
+    }
+    
+    // Redirect to refresh the page and avoid form resubmission
+    header("Location: cart.php");
+    exit();
+}
 ?>
 <!doctype html>
 <html lang="en">
-<!-- calling the cart function -->
-<?php
-  cart();
-  ?>
 <head>
     <title>Quantic Shop</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/png" href="imgs/Quantic Networks SYMBOL.png">
     <!-- Bootstrap CSS -->
       <link rel="icon" type="image/png" href="imgs/Quantic Networks SYMBOL.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
@@ -22,7 +51,7 @@ include("functions/main_function.php");
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-       <style>
+      <style>
         .card-img{
           height: 80px;
           object-fit: contain;
@@ -253,10 +282,10 @@ include("functions/main_function.php");
               right: -50px;
               width: 300px;
               height: 300px;
-              background-color: #f1e42c;
+              background-color: #e0d209ff;
               opacity: 0.15;
               border-radius: 50%;
-              filter: blur(80px);
+              filter: blur(60px);
               animation: floatBlob 10s ease-in-out infinite;
               z-index: 0;
             }
@@ -268,10 +297,10 @@ include("functions/main_function.php");
       </style>
 </head>
 <body class="bg-light">
-   <!-- Navigation Bar -->
+  <!-- Navigation Bar -->
   <div class="container-fluid mb-3">
     <nav class="navbar navbar-expand-md navbar-light fixed-top">
-        <div class="container">
+        <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center" href="shop.php">
                 <img src="imgs/Quantic Networks SYMBOL.png" alt="Quantic Networks" class="navbar-logo-symbol me-2">
                 <span class="navbar-logo-text">Quantic Networks</span>
@@ -287,210 +316,186 @@ include("functions/main_function.php");
                     <li class="nav-item">
                         <a class="nav-link" href="display_all_products.php">Products</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./users/user_login.php"><i class="bi bi-person-fill"></i> Login</a>
-                    </li>
+                    <?php
+                                if(!isset($_SESSION['username'])){
+                                    echo " <li class='nav-item'>
+                                    <a class='nav-link' href='#'></i> Welcome Guest</a>
+                                </li>";
+                                }else{
+                                    echo " <li class='nav-item'>
+                                    <a class='nav-link' href='#'></i> Welcome ".$_SESSION['username']."</a>
+                                </li>"; }
+
+                                if(!isset($_SESSION['username'])){
+                                    echo " <li class='nav-item'>
+                                    <a class='nav-link' href='./users/user_login.php'><i class='bi bi-person-fill'></i> Login</a>
+                                </li>";
+                                }else{
+                                    echo " <li class='nav-item'>
+                                    <a class='nav-link' href='./users/logout.php'>Logout</a>
+                                </li>";
+                                }
+                                ?>  
                     <li class="nav-item d-flex align-items-bottom">
                         <a href="#"><i class="bi bi-whatsapp mx-3 fs-5"></i></a>
                         <a href="#"><i class="bi bi-facebook mx-3 fs-5"></i></a>
-                        <a href="#"><i class="bi bi-instagram  mx-3 fs-5"></i></a> 
-                        <a href="#" style="text-decoration: none;"><i class="bi bi-telephone-fill mx-3 fs-5"></i><strong>(+254) 114 063 049</strong></a>
-                  
+                        <a href="#"><i class="bi bi-instagram  mx-3 fs-5"></i></a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
   </div>
-  <main>
-    
+<main>
     <div class="container-fluid bg-light p-0">
-      <div class="row">
-        <div class="products-header text-center p-2">
-          <h2 class="small-header">Products</h2>
-          <p class="text-label">The following products are in the Cart</p>
-        </div>
-      </div>
         <div class="container mt-5">
-          <div class="row">
-            <form action="" method="post">
-          <div class="table-responsive">
-            <table class="table table-bordered table-sm text-center">
-                      
-                    <?php
-                      global $con;
-                      $get_ip = getIPAddress();//calling the function to get user Ip address and storing it in get_ip
-                      $cart_query= "select * from `cart_details` where ip_address='$get_ip'";
-                      $result_query=mysqli_query($con,$cart_query);
-                      $result_count=mysqli_num_rows($result_query);//This codes counts the number of rows in the cart details table and list them in table format
-                      if($result_count>0){
-                        // Cart table headers
-                            echo "
-                            <thead>
-                            <tr>
-                              <th>Product title</th>
-                              <th>Product Image</th>
-                              <th>Quantity</th>
-                              <th>Total Price</th>
-                              <th>Remove</th>
-                              <th colspan='2'>Operations</th>
-                            </tr>
-                          </thead>
-                          <tbody>";
-                                while($row=mysqli_fetch_array($result_query)){
-                                  $product_id=$row['product_id'];
-                                  $select_products="select * from `products` where product_id='$product_id'";
-                                  $result_products=mysqli_query($con,$select_products);
-                                while($row_product_price=mysqli_fetch_array($result_products)){
-                                    $product_price=array($row_product_price['product_price']);
-                                    $price_table=$row_product_price['product_price'];
-                                    $product_title=$row_product_price['product_title'];
-                                    $product_image1=$row_product_price['product_image1'];
-                                    $product_values=array_sum($product_price);
-                                    $total_price=0;
-                                    $total_price+=$product_values;
-                                ?>
-                                <tr>
-                                  <td><?php echo $product_title ; ?></td>
-                                  <td> <img src='adminControl/product-images/<?php echo $product_image1 ;?>' class='card-img'> </td>
-                                  <td> <input type='text' name='qty' class='form-input w-50'> </td>
-                                  <td><?php echo $price_table ; ?>/=</td>
-                                  <!-- I am using [] because I am deleting multiple items from the db hence to initialize the delete in array form -->
-                                  <td> <input type='checkbox' name='removeItem[]' value=' <?php echo $product_id ?>' > </td>
-
-                                  <!-- Code to update quantity -->
-                                  <?php
-                                  $get_ip_add = getIPAddress();
-                                  if(isset($_POST['update_cart'])){
-                                    $quantity=$_POST['qty'];
-                                    $update_cart_qty="update `cart_details` set quantity=$quantity where ip_address='$get_ip_add'";
-                                    $result_query_quantity=mysqli_query($con,$update_cart_qty);
-                                    $total_price= $total_price *  $quantity;
-
-                                  }
-
-
-                                  ?>
-                                  <td>
-                                    <div class="d-flex align-items-center justify-content-center g-2">
-                                        <input type='submit' name='update_cart' value='Update Cart' class='btn btn-outline-primary'>
-                                        <input type='submit' name='remove_cart' value='Remove' class='btn btn-outline-danger'>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <?php   }
-                      }}
-                        else{
-                          echo "<h2 class='text-center text-primary'>Your cart is Empty!</h2>";
-                        }
-                      ?>
-                              </tbody>
-            </table>
-           </div>
-            <!-- Subtotal section -->
-            <div class='mt-3'>
-              <?php 
-               $get_ip = getIPAddress();//calling the function to get user Ip address and storing it in get_ip
-               $cart_query= "select * from `cart_details` where ip_address='$get_ip'";
-               $result_query=mysqli_query($con,$cart_query);
-               $result_count=mysqli_num_rows($result_query);
-               if($result_count>0){
-                echo "<div class='row d-flex align-items-center justify-content-center text-center '>
-                <div class='col'>
-                <h4 class='small'>Subtotal : KES <strong class='text-danger'> $total_price</strong>/= </h4>
-                </div>
-                <div class='col gy-2'>
-                    <a href='./users/checkout.php'><button class='btn btn-outline-secondary mb-1' type='button' id='button-addon2'>Proceed Checkout</button></a>
-                    <a href='shop.php'><button class='btn btn-outline-primary mb-1' type='button' id='button-addon2'>Continue Shoping</button></a>
-                </div>
-                </div>";
-               }
-               else{
-                echo "<div class='text-center'>
-                <a href='shop.php'><button class='btn btn-outline-primary px-3 py-2 mx-auto mb-3' type='button' id='button-addon2'>Continue shoping</button></a>
-                </div>";
-               }
-              ?>
-              
+            <div class="row mt-5">
+                <h3 class="text-primary text-center mt-5">Cart items</h3>
+                <p class="lead text-center">Here is the list of items you have added to the cart</p>
+                
+                <form action="" method="post">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-sm text-center">
+                            <?php
+                            $get_ip = getIPAddress();
+                            $cart_query = "SELECT * FROM `cart_details` WHERE ip_address='$get_ip'";
+                            $result_query = mysqli_query($con, $cart_query);
+                            $result_count = mysqli_num_rows($result_query);
+                            $total_price = 0;
+                            
+                            if ($result_count > 0) {
+                                echo "
+                                <thead>
+                                    <tr>
+                                        <th>Product title</th>
+                                        <th>Product Image</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                        <th>Total</th>
+                                        <th>Remove</th>
+                                        <th>Operations</th>
+                                    </tr>
+                                </thead>
+                                <tbody>";
+                                
+                                while ($row = mysqli_fetch_array($result_query)) {
+                                    $product_id = $row['product_id'];
+                                    $quantity = $row['quantity'];
+                                    
+                                    $select_products = "SELECT * FROM `products` WHERE product_id='$product_id'";
+                                    $result_products = mysqli_query($con, $select_products);
+                                    
+                                    while ($row_product_price = mysqli_fetch_array($result_products)) {
+                                        $product_price = $row_product_price['product_price'];
+                                        $product_title = $row_product_price['product_title'];
+                                        $product_image1 = $row_product_price['product_image1'];
+                                        $item_total = $product_price * $quantity;
+                                        $total_price += $item_total;
+                            ?>
+                                        <tr>
+                                            <td><?php echo $product_title; ?></td>
+                                            <td><img src='adminControl/product-images/<?php echo $product_image1; ?>' class='card-img'></td>
+                                            <td><?php echo $product_price; ?>/=</td>
+                                            <td>
+                                                <input type='number' name='qty[<?php echo $product_id; ?>]' 
+                                                      class='form-control form-input w-50' 
+                                                      value='<?php echo $quantity; ?>' min='1'>
+                                            </td>
+                                            <td><?php echo $item_total; ?>/=</td>
+                                            <td><input type='checkbox' name='removeItem[]' value='<?php echo $product_id; ?>'></td>
+                                            <td>
+                                                <div class="d-flex align-items-center justify-content-center">
+                                                    <input type='submit' name='update_cart' value='Update' class='btn btn-outline-primary btn-sm me-2'>
+                                                    <input type='submit' name='remove_cart' value='Remove' class='btn btn-outline-danger btn-sm'>
+                                                </div>
+                                            </td>
+                                        </tr>
+                            <?php
+                                    }
+                                }
+                            } else {
+                                echo "<tr><td colspan='7' class='text-center py-4'><h4>Your cart is empty!</h4></td></tr>";
+                            }
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Subtotal section -->
+                    <div class='row mt-4 d-flex justify-content-center align-items-center mb-5'>
+                        <?php if ($result_count > 0) { ?>
+                            <div class="col">
+                                <h4 class='mb-0'>Subtotal(KES): <strong class='text-secondary'><?php echo $total_price; ?> /=</strong></h4>
+                            </div>
+                            <div class="col text-center">
+                                <a href='display_all_products.php' class='btn btn-outline-primary me-2'>Continue Shopping</a>
+                                <button type='submit' name='update_cart' class='btn btn-primary'>Update All Quantities</button>
+                                <a href='./users/checkout.php' class='btn btn-success ms-2'>Proceed to Checkout</a>
+                            </div>
+                        <?php } else { ?>
+                            <a href='display_all_products.php' class='btn btn-primary'>Continue Shopping</a>
+                        <?php } ?>
+                    </div>
+                </form>
             </div>
-          </div>
         </div>
-        </form>
-        <?php
+    </div>
+</main>
 
-        function delete_cart_item(){
-          global $con;
-          if(isset($_POST['remove_cart'])){
-            foreach($_POST['removeItem'] as $removeId){
-              echo $removeId;
-              $delete_query="delete from `cart_details` where product_id=$removeId";
-              $result_delete=mysqli_query($con,$delete_query);
-              if($result_delete){
-                echo "<script>window.open('cart.php','_self')</script>";
-              }
-            }
-          }
-        }
-        echo $removeitem=delete_cart_item();
-      ?>
+<footer class="footer mt-5 text-white pt-5 pb-4 position-relative">
+    <!-- Background animation blob -->
+    <div class="footer-blob"></div>
+
+    <div class="container">
+      <div class="row text-center text-md-start">
+        <!-- About / Info -->
+        <div class="col-md-3 mb-4">
+          <h5 class="text-uppercase fw-bold">About Us</h5>
+          <p>We offer the best deals on tech and networking equipment for individuals and businesses across Kenya.</p>
+        </div>
+
+        <!-- Policies -->
+        <div class="col-md-3 mb-4">
+          <h5 class="text-uppercase fw-bold">Policies</h5>
+          <ul class="list-unstyled">
+            <li><a href="#" class="footer-link">Terms & Conditions</a></li>
+            <li><a href="#" class="footer-link">Privacy Policy</a></li>
+            <li><a href="#" class="footer-link">Return Policy</a></li>
+          </ul>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="col-md-3 mb-4">
+          <h5 class="text-uppercase fw-bold">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="#" class="footer-link">FAQs</a></li>
+            <li><a href="#" class="footer-link">Contact Us</a></li>
+            <li><a href="#" class="footer-link">Support</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact / Location -->
+        <div class="col-md-3 mb-4">
+          <h5 class="text-uppercase fw-bold">Visit Us</h5>
+          <p>Nairobi Kasarani,<br>3rd Floor, Sunton Business Center</p>
+          <p><strong>Hours:</strong><br>Mon - Sat: 9:00AM - 6:00PM</p>
+          <p><i class="bi bi-telephone-fill"></i> +254 114 063049</p>
         </div>
       </div>
-    </div>
-  </main>
-  <footer class="footer mt-5 text-white pt-5 pb-4 position-relative">
-  <!-- Background animation blob -->
-  <div class="footer-blob"></div>
 
-  <div class="container">
-    <div class="row text-center text-md-start">
-      <!-- About / Info -->
-      <div class="col-md-3 mb-4">
-        <h5 class="text-uppercase fw-bold">About Us</h5>
-        <p>We offer the best deals on tech and networking equipment for individuals and businesses across Kenya.</p>
-      </div>
-
-      <!-- Policies -->
-      <div class="col-md-3 mb-4">
-        <h5 class="text-uppercase fw-bold">Policies</h5>
-        <ul class="list-unstyled">
-          <li><a href="#" class="footer-link">Terms & Conditions</a></li>
-          <li><a href="#" class="footer-link">Privacy Policy</a></li>
-          <li><a href="#" class="footer-link">Return Policy</a></li>
-        </ul>
-      </div>
-
-      <!-- Quick Links -->
-      <div class="col-md-3 mb-4">
-        <h5 class="text-uppercase fw-bold">Quick Links</h5>
-        <ul class="list-unstyled">
-          <li><a href="#" class="footer-link">FAQs</a></li>
-          <li><a href="#" class="footer-link">Contact Us</a></li>
-          <li><a href="#" class="footer-link">Support</a></li>
-        </ul>
-      </div>
-
-      <!-- Contact / Location -->
-      <div class="col-md-3 mb-4">
-        <h5 class="text-uppercase fw-bold">Visit Us</h5>
-        <p>Nairobi Kasarani,<br>3rd Floor, Sunton Business Center</p>
-        <p><strong>Hours:</strong><br>Mon - Sat: 9:00AM - 6:00PM</p>
-        <p><i class="bi bi-telephone-fill"></i> +254 114 063049</p>
+      <div class="text-center mt-4 border-top pt-3" style="border-color: rgba(255, 255, 255, 0.2);">
+        <p class="mb-0">&copy; 2025 Quantic Networks Kenya. All rights reserved.</p>
       </div>
     </div>
-
-    <div class="text-center mt-4 border-top pt-3" style="border-color: rgba(255, 255, 255, 0.2);">
-      <p class="mb-0">&copy; 2025 Quantic Networks Kenya. All rights reserved.</p>
-    </div>
-  </div>
 </footer>
   <!-- Bootstrap JavaScript Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-    </script>
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
     integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
-    </script>
+  </script>
 </body>
 
 </html>

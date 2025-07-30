@@ -2,6 +2,7 @@
 // include("shop-header.php");
 include("includes/connect.php");
 include("functions/main_function.php");
+session_start();
 ?>
 <!doctype html>
 <html lang="en">
@@ -14,71 +15,112 @@ include("functions/main_function.php");
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="icon" type="image/png" href="imgs/Quantic Networks SYMBOL.png">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+          .product-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            margin-bottom: 30px;
+        }
+        
+        .breadcrumb {
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+        }
+        
+        .breadcrumb-item a {
+            color: #6082ff;
+            transition: color 0.2s;
+        }
+        
+        .breadcrumb-item a:hover {
+            color: #4a6cf7;
+            text-decoration: none;
+        }
+        
+        .breadcrumb-item.active {
+            color: #6c757d;
+        }
+    </style>
 </head>
 
 <body>
   <!-- Responsive Navigation Bar -->
-    <nav class="navbar navbar-expand-md bg mb-4">
-        <a href="shop.php" class="navbar-brand  fs-3 text-white p-2">Quantic <span class="text-danger">Networks</span></a>
-        <button class="navbar-toggler me-3" type="button" data-bs-toggle="collapse" data-bs-target="#btn">
-            <i class='bx bx-menu text-white bx-md'></i>
-        </button>
-        <div class="collapse navbar-collapse" id="btn">
-            <ul class="navbar-nav ms-auto ">
-                <li class="nav-item">
-                    <a href="shop.php" class="nav-link mx-2 text-white fs-5">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="display_all_products.php" class="nav-link mx-2 text-white fs-5">Products</a>
-                </li>
-                <li class="nav-item">
-                    <a href="display_all_products.php" class="nav-link mx-2 text-white fs-5">Total Price : Kes <span class="text-danger"><?php total_price();?> /=</span> </a>
-                </li>
-                
-            </ul>
-            <div class="d-flex justify-content-evenly ">
-                <a href="#"><i class="bi bi-facebook text-white fs-5 mx-3"></i></a>
-                <a href="#"><i class="bi bi-instagram text-white fs-5 mx-3"></i></a>
-                <a href="#"><h4><i class="bi bi-cart text-white mx-2"><sup class="text-label text-danger"><?php cart_items();?></sup></i></h4></a>
-            </div>
-            <ul class="navbar-nav ms-auto ">
-                <li class="nav-item">
-                    <a href="#" class="nav-link mx-2 text-white fs-5">Welcome Guest</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link mx-2 text-white fs-5">Login</a>
-                </li>
-                
-            </ul>
-        </div>
+  <nav class="navbar navbar-expand-md navbar-light fixed-top">
+          <div class="container">
+              <a class="navbar-brand d-flex align-items-center" href="shop.php">
+                  <img src="imgs/Quantic Networks SYMBOL.png" alt="Quantic Networks" class="navbar-logo-symbol me-2">
+                  <span class="navbar-logo-text">Quantic Networks</span>
+              </a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                  <ul class="navbar-nav ms-auto">
+                      <li class="nav-item">
+                          <a class="nav-link active" href="shop.php">Home</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="display_all_products.php">Products</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="cart.php"><p><i class="bi bi-bag-fill"></i><small class="text-primary"> <?php cart_items();?></small></p></a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="display_all_products.php">Total Price : Kes <span class="text-primary"><?php total_price();?> /=</span></a>
+                      </li>
+                      <?php
+                                  if(!isset($_SESSION['username'])){
+                                      echo " <li class='nav-item'>
+                                      <a class='nav-link' href='#'></i> Welcome Guest</a>
+                                  </li>";
+                                  }else{
+                                      echo " <li class='nav-item'>
+                                      <a class='nav-link' href='#'></i> Welcome ".$_SESSION['username']."</a>
+                                  </li>"; }
+
+                                  if(!isset($_SESSION['username'])){
+                                      echo " <li class='nav-item'>
+                                      <a class='nav-link' href='./users/user_login.php'><i class='bi bi-person-fill'></i> Login</a>
+                                  </li>";
+                                  }else{
+                                      echo " <li class='nav-item'>
+                                      <a class='nav-link' href='./users/logout.php'>Logout</a>
+                                  </li>";
+                                  }
+                                  ?>  
+                      <li class="nav-item d-flex align-items-bottom">
+                          <a href="#"><i class="bi bi-whatsapp mx-3 fs-5"></i></a>
+                          <a href="#"><i class="bi bi-facebook mx-3 fs-5"></i></a>
+                          <a href="#"><i class="bi bi-instagram  mx-3 fs-5"></i></a> 
+                          <a href="#" style="text-decoration: none;"><strong>(+254) 114 063 049</strong></a>
+                    
+                      </li>
+                  </ul>
+              </div>
+          </div>
     </nav>
   <main>
     <div class="container container-fluid">
-      <div class="row bg text-light text-center ">
-        <div class="col-md-6">
-          <h3 class="mt-4">Welcome to Quantic Networks shop</h3>
-          <h1 class="text-danger small-header">Discounted prices</h1>
-          <p class="text-label text-light">Save Time and Money with our *free delivery* for orders more than <br>Ksh/=
-            10,000.00</p>
-          <a href="#" class="btn btn-outline-success m-3">Shop for Networking Equipment</a>
-        </div>
-        <div class="col-md-6">
-          <img src="imgs/Shop.jpg" class="w-50 h-90 m-3">
-        </div>
-      </div>
-    </div>
     <div class="container container-fluid bg-light p-0">
       <div class="row">
-        <div class="products-header text-center p-2">
-          <h2 class="small-header">Products</h2>
-          <p class="text-label">Here are some of the Products we offer...</p>
+        <div class="product-header text-center py-4">
+            <div class="container">
+                <nav aria-label="breadcrumb" class="d-flex justify-content-center">
+                    <ol class="breadcrumb bg-transparent mb-0">
+                        <li class="breadcrumb-item"><a href="shop.php" class="text-decoration-none">Home</a></li>
+                        <li class="breadcrumb-item"><a href="display_all_products.php" class="text-decoration-none">Products</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Product Details</li>
+                    </ol>
+                </nav>
+                <h1 class="display-5 fw-bold text-primary mt-3">Product Details</h1>
+                <p class="lead text-muted">Explore all the specifications and features of this product</p>
+            </div>
         </div>
         <!-- search area -->
         <form class="search" action="search_product.php" method="get">
@@ -86,7 +128,7 @@ include("functions/main_function.php");
             <input type="text" class="form-control" placeholder="Search" name="search_data" aria-label="Search"
               aria-describedby="button-addon2">
             <!-- <button class="btn btn-outline-success" type="button" id="button-addon2">Search</button> -->
-            <input type="submit" value="search" class="btn btn-outline-success" name="search_data_product" >
+            <input type="submit" value="search" class="btn btn-warning" name="search_data_product" >
           </div>
         </form>
         <div class="col-md-10">
@@ -101,10 +143,10 @@ include("functions/main_function.php");
           </div>
         </div>
 
-        <div class="col-md-2 bg p-0">
+        <div class="col-md-2 bg p-0" style="background-color: rgba(96, 130, 255, 0.6);">
           <!-- products to be displayed -->
           <ul class="navbar-nav me-auto text-center">
-            <li class="nav-item bg-success">
+            <li class="nav-item bg-warning">
               <a href="#" class="nav-link text-light">
                 <h4>Categories</h4>
               </a>
@@ -117,7 +159,7 @@ include("functions/main_function.php");
           </ul>
           <!-- brands to be displayed -->
           <ul class="navbar-nav me-auto text-center">
-            <li class="nav-item bg-success">
+            <li class="nav-item bg-warning">
               <a href="#" class="nav-link text-light">
                 <h4>Brands</h4>
               </a>

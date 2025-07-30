@@ -1,15 +1,15 @@
 <?php
 include('../includes/connect.php');
 include('../functions/main_function.php');
-@session_start();
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="imgs/Quantic Networks SYMBOL.png">
-    <title>User -Login </title>
+    <link rel="icon" type="image/png" href="../imgs/Quantic Networks SYMBOL.png">
+    <title>Billing-user </title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../style.css">
@@ -131,69 +131,47 @@ include('../functions/main_function.php');
         </style>
 </head>
 <body class="bg-light">
-    <div class="container-fluid m-0 p-0">
-        <h1 class="text-center mt-2 navbar-logo-text">User Login</h1>
-        <div class="row d-flex align-items-center justify-content-center">
-            <div class="col-lg-12 col-xl-6 mt-5">
-                <div class="text-center">
-                    <img src="../imgs/Quantic Networks SYMBOL.png" style="width:150px;" alt="">
-                    <h3 class="navbar-logo-text">Authentication</h3>
-                </div>
-                <form action="" method="post" class="mx-5" >
-                    <!-- username field -->
-                <div class="form-outline mb-3">
-                    <label for="username" class="form-label lead">Username</label>
-                    <input type="text" id="username" class="form-control" placeholder="Enter your username" required="required" name="user_username" />
-                </div>
-                <!-- Password field -->
-                <div class="form-outline mb-3">
-                    <label for="Password" class="form-label lead">Password</label>
-                    <input type="password" id="Password" class="form-control" placeholder="Enter your new Password" required="required" name="user_userpass" />
-                </div>
-                <!-- Login button -->
-                <div class="mt-4 pt-2 d-grid">
-                    <input type="submit" value="Login" class="btn btn-outline-primary px-4 py-2" name="user_login">
-                    <p class="mt-2 small fw-bold mb-0">Don't have an account? <a href="user_registration.php" class="text-primary text-decoration-none" >Register</a></p>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+                    <div class="container">
+                        <a class="navbar-brand d-flex align-items-center" href="#">
+                            <img src="../imgs/Quantic Networks SYMBOL.png" alt="Quantic Networks" class="navbar-logo-symbol me-2">
+                            <span class="navbar-logo-text">Quantic Networks</span>
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav ms-auto">
+                                <?php
+                                    if(!isset($_SESSION['username'])){
+                                        echo " <li class='nav-item'>
+                                        <a class='nav-link' href='#'></i> Welcome Guest</a>
+                                    </li>";
+                                    }else{
+                                        echo " <li class='nav-item'>
+                                        <a class='nav-link' href='#'></i> Welcome ".$_SESSION['username']."</a>
+                                    </li>"; }
+
+                                    if(!isset($_SESSION['username'])){
+                                        echo " <li class='nav-item'>
+                                        <a class='nav-link' href='./users/user_login.php'><i class='bi bi-person-fill'></i> Login</a>
+                                    </li>";
+                                    }else{
+                                        echo " <li class='nav-item'>
+                                        <a class='nav-link' href='logout.php'>Logout</a>
+                                    </li>";
+                                    }
+                                    ?>  
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="../shop.php">Home</a>
+                                </li>
+                                
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#contact">Contact Us (+245) 114 063 049</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+    </nav>
 </body>
 </html>
-<?php 
-        if(isset($_POST['user_login'])){
-            $user_username=$_POST['user_username'];
-            $user_userpass=$_POST['user_userpass'];
-            $select_query="select * from `user_table` where user_name='$user_username'";
-            $result=mysqli_query($con,$select_query);
-            $row_count=mysqli_num_rows($result);
-            $row_data=mysqli_fetch_assoc($result); 
-            $user_ip=getIPAddress();
-            // cart items
-            $select_query_cart="select * from `cart_details` where ip_address='$user_ip'";
-            $result_ip=mysqli_query($con,$select_query_cart);
-            $row_count_cart=mysqli_num_rows($result_ip);
-            if($row_count>0){
-                $_SESSION['username']=$user_username;
-                if(password_verify($user_userpass,$row_data['user_password'])){
-                        // 
-                        if($row_count==1 and $row_count_cart==0){
-                            $_SESSION['username']=$user_username;
-                            echo "<script>alert('Login Successful!')</script>";
-                            echo "<script>window.open('profile.php','_self')</script>";
-                        }else{
-                            $_SESSION['username']=$user_username;
-                            echo "<script>alert('Login Successful!')</script>";
-                            echo "<script>window.open('payment.php','_self')</script>";
-                        }
-                }else{
-                        echo "<script>alert('Invalid credentials!')</script>";
-                }
-            }else{
-                echo "<script>alert('Invalid credentials!')</script>";
-            }
-        }
-
-
-?>

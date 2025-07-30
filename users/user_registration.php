@@ -7,6 +7,7 @@ include('../functions/main_function.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="imgs/Quantic Networks SYMBOL.png">
     <title>User -Registration </title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
@@ -241,6 +242,17 @@ include('../functions/main_function.php');
         }else{
             die(mysqli_error($con));
         }
-    }
+        }
+        // selecting cart items
+        $select_cart_item ="select * from `cart_details` where ip_address='$user_ip'";
+        $results_cart=mysqli_query($con,$select_cart_item);
+        $row_count=mysqli_num_rows($results_cart);
+        if($row_count>0){
+            $_SESSION['username']=$user_username;
+            echo "<script>alert('You have items in your cart')</script>";
+            echo "<script>window.open('checkout.php','_self')</script>";
+        }else{
+            echo "<script>window.open('../shop.php','_self')</script>";
+        }
     }
 ?>
