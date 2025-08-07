@@ -170,6 +170,7 @@ include('../functions/main_function.php');
             $row_count=mysqli_num_rows($result);
             $row_data=mysqli_fetch_assoc($result); 
             $user_ip=getIPAddress();
+            $_SESSION['user_id'] = $row_data['user_id'];
             // cart items
             $select_query_cart="select * from `cart_details` where ip_address='$user_ip'";
             $result_ip=mysqli_query($con,$select_query_cart);

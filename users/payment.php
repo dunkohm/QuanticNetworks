@@ -9,7 +9,6 @@ if(!isset($_SESSION['username'])) {
     exit();
 }
 // Get user_id from session instead of IP address
-$user_id = $_SESSION['user_id']; // Make sure you store user_id in session during login
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -151,10 +150,28 @@ $user_id = $_SESSION['user_id']; // Make sure you store user_id in session durin
 <body class="bg-light">
     <!-- php code to access user_id -->
     <?php 
-       
+       // Get user_id from session
+        if(isset($_SESSION['user_id'])) {
+            $user_id = $_SESSION['user_id'];
+        } 
+        // Fallback to IP-based lookup if needed
+        else {
+            $user_ip = getIPAddress();
+            $get_user = "SELECT * FROM `user_table` WHERE user_ipaddress='$user_ip'";
+            $result = mysqli_query($con, $get_user);
+            
+            if(mysqli_num_rows($result) > 0) {
+                $run_query = mysqli_fetch_array($result);
+                $user_id = $run_query['user_id'];
+                // Store in session for future use
+                $_SESSION['user_id'] = $user_id;
+            } else {
+                // Handle case where user isn't found
+                header("Location: user_login.php");
+                exit();
+            }
+        }
 
-
-    
     ?>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
                     <div class="container">
@@ -204,61 +221,61 @@ $user_id = $_SESSION['user_id']; // Make sure you store user_id in session durin
                 <h2>Payment Options</h2>
             </div>
             <div class="col-md-6 border border-1 text-center shadow mt-5 mb-5" style="background-color:#fff;">
-    <img src="../imgs/mpesalogo.png" alt="" class="img-fluid" style="height: 80px;">
-    <div class="row">
-        <div class="col-md-12">
-            <h2 class="text-success text-center mt-3">Lipa Na M-Pesa</h2>
-            <div class="payment-steps bg-light p-3 rounded mx-auto mb-3" style="max-width: 500px;">
-                <h5 class="text-center text-primary mb-3">Simple & Secure Payment</h5>
-                <ol class="list-unstyled">
-                    <li class="mb-2 d-flex align-items-start">
-                        <span class="badge bg-primary rounded-circle me-2">1</span>
-                        <span>Enter your Safaricom number</span>
-                    </li>
-                    <li class="mb-2 d-flex align-items-start">
-                        <span class="badge bg-primary rounded-circle me-2">2</span>
-                        <span>Click "Pay Now" button</span>
-                    </li>
-                    <li class="mb-2 d-flex align-items-start">
-                        <span class="badge bg-primary rounded-circle me-2">3</span>
-                        <span>Check your phone for STK Push</span>
-                    </li>
-                    <li class="mb-2 d-flex align-items-start">
-                        <span class="badge bg-primary rounded-circle me-2">4</span>
-                        <span>Enter your M-Pesa PIN when prompted</span>
-                    </li>
-                    <li class="d-flex align-items-start">
-                        <span class="badge bg-primary rounded-circle me-2">5</span>
-                        <span>You'll receive payment confirmation via SMS</span>
-                    </li>
-                </ol>
-                
-                <div class="payment-form mt-4">
-                    <form action="process_payment.php" method="post" class="needs-validation" novalidate>
-                        <div class="mb-3">
-                            <label for="phone" class="form-label"><strong>Safaricom Number</strong></label>
-                            <input type="tel" class="form-control text-center" id="phone" 
-                                name="phone" placeholder="07XXXXXXXX" pattern="[0-9]{9,12}" required>
-                            <div class="invalid-feedback">
-                                Please enter a valid Safaricom number
+                <img src="../imgs/mpesalogo.png" alt="" class="img-fluid" style="height: 80px;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="text-success text-center mt-3">Lipa Na M-Pesa</h2>
+                        <div class="payment-steps bg-light p-3 rounded mx-auto mb-3" style="max-width: 500px;">
+                            <h5 class="text-center text-primary mb-3">Simple & Secure Payment</h5>
+                            <ol class="list-unstyled">
+                                <li class="mb-2 d-flex align-items-start">
+                                    <span class="badge bg-primary rounded-circle me-2">1</span>
+                                    <span>Enter your Safaricom number</span>
+                                </li>
+                                <li class="mb-2 d-flex align-items-start">
+                                    <span class="badge bg-primary rounded-circle me-2">2</span>
+                                    <span>Click "Pay Now" button</span>
+                                </li>
+                                <li class="mb-2 d-flex align-items-start">
+                                    <span class="badge bg-primary rounded-circle me-2">3</span>
+                                    <span>Check your phone for STK Push</span>
+                                </li>
+                                <li class="mb-2 d-flex align-items-start">
+                                    <span class="badge bg-primary rounded-circle me-2">4</span>
+                                    <span>Enter your M-Pesa PIN when prompted</span>
+                                </li>
+                                <li class="d-flex align-items-start">
+                                    <span class="badge bg-primary rounded-circle me-2">5</span>
+                                    <span>You'll receive payment confirmation via SMS</span>
+                                </li>
+                            </ol>
+                            
+                            <div class="payment-form mt-4">
+                                <form action="process_payment.php" method="post" class="needs-validation" novalidate>
+                                    <div class="mb-3">
+                                        <label for="phone" class="form-label"><strong>Safaricom Number</strong></label>
+                                        <input type="tel" class="form-control text-center" id="phone" 
+                                            name="phone" placeholder="07XXXXXXXX" pattern="[0-9]{9,12}" required>
+                                        <div class="invalid-feedback">
+                                            Please enter a valid Safaricom number
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+                                    <button type="submit" class="btn btn-success btn-lg w-100 py-2">
+                                        <i class="bi bi-phone"></i> Pay Now via M-Pesa
+                                    </button>
+                                </form>
+                            </div>
+                            
+                            <div class="payment-info mt-3 small text-muted">
+                                <p class="mb-1">• Standard M-Pesa charges apply</p>
+                                <p class="mb-1">• Payment processed instantly</p>
+                                <p>• Need help? Call (+254) 114 063 049</p>
                             </div>
                         </div>
-                        <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
-                        <button type="submit" class="btn btn-success btn-lg w-100 py-2">
-                            <i class="bi bi-phone"></i> Pay Now via M-Pesa
-                        </button>
-                    </form>
-                </div>
-                
-                <div class="payment-info mt-3 small text-muted">
-                    <p class="mb-1">• Standard M-Pesa charges apply</p>
-                    <p class="mb-1">• Payment processed instantly</p>
-                    <p>• Need help? Call (+254) 114 063 049</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
             <div class="col-md-6 text-center">
                 <a href="order.php?user_id=<?php echo $user_id ?>" class="h2 text-decoration-none">Pay Offline</a>
             </div>

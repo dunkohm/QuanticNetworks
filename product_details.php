@@ -46,6 +46,23 @@ session_start();
         .breadcrumb-item.active {
             color: #6c757d;
         }
+                /* Navbar Styles (keep your existing navbar styles) */
+        .navbar {
+            z-index: 1030;
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-logo-text {
+            color: #6082ff;
+            font-weight: 700;
+        }
+        .navbar-logo-symbol {
+                        height: 32px; /* Adjust based on your symbol's aspect ratio */
+                        width: auto;
+                        transition: all 0.3s ease;
+                    }
+        
     </style>
 </head>
 
@@ -135,9 +152,9 @@ session_start();
           <div class="row px-1">            
             <!-- Calling function to fetch products from the database -->
             <?php 
-           view_product_details();
-           get_unique_Categories();
-           get_unique_Brands();
+            view_product_details();
+            get_unique_Categories();
+            get_unique_Brands();
             ?>
           
           </div>

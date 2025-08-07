@@ -250,7 +250,7 @@ function view_product_details(){
           <h3 class='fw-bold'>Kes $product_price/-</h3>
           
           <a href='shop.php?add_to_cart=$product_id' class='btn bg btn-outline-success'>Add to cart</a>
-          <a href='shop.php' class='btn btn-outline-primary'>Shop more</a>
+          <a href='display_all_products.php' class='btn btn-outline-primary'>Shop more</a>
         </div>
       </div>
     </div>
@@ -267,7 +267,7 @@ function view_product_details(){
                   <img src='adminControl/product-images/$product_image3' class='card-img-center image-fluid' alt='$product_title' style='width: 250px;'>
                 </div>
                 <div class='col-md-12 border border-secondary rounded bg-secondary text-light mb-5 shadow'>
-                  <h4 class='text-center text-label mt-3'>Product Description</h4>
+                  <h4 class='text-center text-light mt-3'>Product Description</h4>
                   <p class='mt-3 lead text-center mt-3'>$product_description</p>
                 </div>
               </div>
