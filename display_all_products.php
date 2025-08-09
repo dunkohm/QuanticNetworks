@@ -390,15 +390,15 @@ session_start();
     <div class="row text-center text-md-start">
       <!-- About / Info -->
       <div class="col-md-3 mb-4">
-        <h5 class="text-uppercase fw-bold">About Us</h5>
+        <h5 class="text-uppercase fw-bold"><i class="bi bi-info-circle-fill"></i> About Us</h5>
         <p>We offer the best deals on tech and networking equipment for individuals and businesses across Kenya.</p>
       </div>
 
       <!-- Policies -->
       <div class="col-md-3 mb-4">
-        <h5 class="text-uppercase fw-bold">Policies</h5>
+        <h5 class="text-uppercase fw-bold"><i class="bi bi-list-ol"></i> Policies</h5>
         <ul class="list-unstyled">
-          <li><a href="#" class="footer-link">Terms & Conditions</a></li>
+          <li><a href="legal-documents/terms-conditions.php" class="footer-link">Terms & Conditions</a></li>
           <li><a href="#" class="footer-link">Privacy Policy</a></li>
           <li><a href="#" class="footer-link">Return Policy</a></li>
         </ul>
@@ -406,7 +406,7 @@ session_start();
 
       <!-- Quick Links -->
       <div class="col-md-3 mb-4">
-        <h5 class="text-uppercase fw-bold">Quick Links</h5>
+        <h5 class="text-uppercase fw-bold"><i class="bi bi-box-arrow-up-right"></i> Quick Links</h5>
         <ul class="list-unstyled">
           <li><a href="#" class="footer-link">FAQs</a></li>
           <li><a href="#" class="footer-link">Contact Us</a></li>
@@ -416,9 +416,9 @@ session_start();
 
       <!-- Contact / Location -->
       <div class="col-md-3 mb-4">
-        <h5 class="text-uppercase fw-bold">Visit Us</h5>
+        <h5 class="text-uppercase fw-bold"><i class="bi bi-map-fill"></i> Visit Us</h5>
         <p>Nairobi Kasarani,<br>3rd Floor, Sunton Business Center</p>
-        <p><strong>Hours:</strong><br>Mon - Sat: 9:00AM - 6:00PM</p>
+        <p><strong><i class="bi bi-hourglass-split"></i> Hours:</strong><br>Mon - Sat: 9:00AM - 6:00PM</p>
         <p><i class="bi bi-telephone-fill"></i> +254 114 063049</p>
       </div>
     </div>

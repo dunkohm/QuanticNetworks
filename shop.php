@@ -311,7 +311,7 @@
                       </li>";
                       }else{
                         echo " <li class='nav-item'>
-                          <a class='nav-link' href='./users/logout.php'>Logout</a>
+                          <a class='nav-link' href='./users/logout.php'><i class='bi bi-box-arrow-right text-danger'></i> Logout</a>
                       </li>";
                       }
                       ?>                  
@@ -417,51 +417,52 @@
         </div>
       </div>
     </main>
-    <footer class="footer mt-5 text-white pt-5 pb-4 position-relative">
-      <!-- Background animation blob -->
-      <div class="footer-blob"></div>
-      <div class="container">
-        <div class="row text-center text-md-start">
-          <!-- About / Info -->
-          <div class="col-md-3 mb-4">
-            <h5 class="text-uppercase fw-bold">About Us</h5>
-            <p>We offer the best deals on tech and networking equipment for individuals and businesses across Kenya.</p>
-          </div>
+    <footer class="footer mt-3 text-white pt-3 pb-3 position-relative">
+            <!-- Background animation blob -->
+            <div class="footer-blob"></div>
 
-          <!-- Policies -->
-          <div class="col-md-3 mb-4">
-            <h5 class="text-uppercase fw-bold">Policies</h5>
-            <ul class="list-unstyled">
-              <li><a href="#" class="footer-link">Terms & Conditions</a></li>
-              <li><a href="#" class="footer-link">Privacy Policy</a></li>
-              <li><a href="#" class="footer-link">Return Policy</a></li>
-            </ul>
-          </div>
+            <div class="container">
+                <div class="row text-center text-md-start">
+                <!-- About / Info -->
+                <div class="col-md-3 mb-4">
+                    <h5 class="text-uppercase fw-bold"><i class="bi bi-info-circle-fill"></i> About Us</h5>
+                    <p>We offer the best deals on tech and networking equipment for individuals and businesses across Kenya.</p>
+                </div>
 
-          <!-- Quick Links -->
-          <div class="col-md-3 mb-4">
-            <h5 class="text-uppercase fw-bold">Quick Links</h5>
-            <ul class="list-unstyled">
-              <li><a href="#" class="footer-link">FAQs</a></li>
-              <li><a href="#" class="footer-link">Contact Us</a></li>
-              <li><a href="#" class="footer-link">Support</a></li>
-            </ul>
-          </div>
+                <!-- Policies -->
+                <div class="col-md-3 mb-4">
+                    <h5 class="text-uppercase fw-bold"><i class="bi bi-list-ol"></i> Policies</h5>
+                    <ul class="list-unstyled">
+                    <li><a href="legal-documents/terms-conditions.php" class="footer-link">Terms & Conditions</a></li>
+                    <li><a href="legal-documents/privacy-policy.php" class="footer-link">Privacy Policy</a></li>
+                    <li><a href="legal-documents/return-policy.php" class="footer-link">Return Policy</a></li>
+                    </ul>
+                </div>
 
-          <!-- Contact / Location -->
-          <div class="col-md-3 mb-4">
-            <h5 class="text-uppercase fw-bold">Visit Us</h5>
-            <p>Nairobi Kasarani,<br>3rd Floor, Sunton Business Center</p>
-            <p><strong>Hours:</strong><br>Mon - Sat: 9:00AM - 6:00PM</p>
-            <p><i class="bi bi-telephone-fill"></i> +254 114 063049</p>
-          </div>
-        </div>
+                <!-- Quick Links -->
+                <div class="col-md-3 mb-4">
+                    <h5 class="text-uppercase fw-bold"><i class="bi bi-box-arrow-up-right"></i> Quick Links</h5>
+                    <ul class="list-unstyled">
+                    <li><a href="#" class="footer-link">FAQs</a></li>
+                    <li><a href="#" class="footer-link">Contact Us</a></li>
+                    <li><a href="#" class="footer-link">Support</a></li>
+                    </ul>
+                </div>
 
-        <div class="text-center mt-4 border-top pt-3" style="border-color: rgba(255, 255, 255, 0.2);">
-          <p class="mb-0">&copy; 2025 Quantic Networks Kenya. All rights reserved.</p>
-        </div>
-      </div>
-  </footer>
+                <!-- Contact / Location -->
+                <div class="col-md-3 mb-4">
+                    <h5 class="text-uppercase fw-bold"><i class="bi bi-map-fill"></i> Visit Us</h5>
+                    <p>Nairobi Kasarani,<br>3rd Floor, Sunton Business Center</p>
+                    <p><strong><i class="bi bi-hourglass-split"></i> Hours:</strong><br>Mon - Sat: 9:00AM - 6:00PM</p>
+                    <p><i class="bi bi-telephone-fill"></i> +254 114 063049</p>
+                </div>
+                </div>
+
+                <div class="text-center mt-4 border-top pt-3" style="border-color: rgba(255, 255, 255, 0.2);">
+                <p class="mb-0">&copy; 2025 Quantic Networks Kenya. All rights reserved.</p>
+                </div>
+            </div>
+    </footer>
 
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
