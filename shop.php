@@ -307,6 +307,14 @@
 
                       if(!isset($_SESSION['username'])){
                         echo " <li class='nav-item'>
+                          <a class='nav-link' href='#'></i> Register</a>
+                      </li>";
+                      }else{
+                        echo " <li class='nav-item'>
+                          <a class='nav-link' href='users/profile.php'></i>My Account</a></li>"; }
+
+                      if(!isset($_SESSION['username'])){
+                        echo " <li class='nav-item'>
                           <a class='nav-link' href='./users/user_login.php'><i class='bi bi-person-fill'></i> Login</a>
                       </li>";
                       }else{
@@ -316,11 +324,7 @@
                       }
                       ?>                  
                       <li class="nav-item d-flex align-items-bottom">
-                          <a href="#"><i class="bi bi-whatsapp mx-3 fs-5"></i></a>
-                          <a href="#"><i class="bi bi-facebook mx-3 fs-5"></i></a>
-                          <a href="#"><i class="bi bi-instagram  mx-3 fs-5"></i></a> 
                           <a href="#" style="text-decoration: none;"><i class="bi bi-telephone-fill mx-3 fs-5"></i><strong>(+254) 114 063 049</strong></a>
-                    
                       </li>
                   </ul>
               </div>

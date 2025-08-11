@@ -137,6 +137,9 @@ $user_id = $_SESSION['user_id'];
                         <a class="nav-link" href="../shop.php">Home</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="../display_all_products.php">Shop</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link text-danger" href="logout.php"><i class="bi bi-box-arrow-right"></i> Logout</a>
                     </li>
                 </ul>
@@ -185,6 +188,9 @@ $user_id = $_SESSION['user_id'];
                 <?php get_user_order_details();
                 if(isset($_GET['edit_account'])){
                     include('edit_account.php');
+                }
+                if(isset($_GET['my_orders'])){
+                    include('user_orders.php');
                 }
                 ?>
             </div>
