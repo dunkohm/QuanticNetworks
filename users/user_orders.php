@@ -6,7 +6,8 @@ $user_id=$row_fetch['user_id'];
 ?>
 
 <h3 class="text-light text-center my-3">All My Orders</h3>
-<table class="table table-bordered mt-5">
+<div class="table-responsive-sm">
+<table class="table table-sm table-bordered table-hover mt-5">
     <thead class="text-center text-light bg-primary">
         <tr>
         <th>Serial No</th>
@@ -44,7 +45,7 @@ $user_id=$row_fetch['user_id'];
                     <td>$invoice_number</td>
                     <td>$order_date</td>
                     <td>$order_status</td>
-                    <td><a href='confirm_payment.php' class='text-center text-light'>Confirm</a></td>
+                    <td><a href='confirm_payment.php?order_id=$order_id' class='text-center text-light'>Confirm</a></td>
                 </tr>";
                 $number++;
             }
@@ -55,3 +56,4 @@ $user_id=$row_fetch['user_id'];
 
     </tbody>
 </table>
+</div>

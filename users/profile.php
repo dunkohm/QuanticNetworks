@@ -162,7 +162,7 @@ $user_id = $_SESSION['user_id'];
             </div>";
             ?>
             
-            <a href="profile.php" class="sidebar-link active">
+            <a href="profile.php" class="sidebar-link">
                 <i class="bi bi-speedometer2"></i> Dashboard
             </a>
             <a href="profile.php" class="sidebar-link">
@@ -171,7 +171,7 @@ $user_id = $_SESSION['user_id'];
             <a href="profile.php?my_orders" class="sidebar-link">
                 <i class="bi bi-list-check"></i> My Orders
             </a>
-            <a href="profile.php?edit_account" class="sidebar-link">
+            <a href="profile.php?edit_account" class="sidebar-link ">
                 <i class="bi bi-pencil-square"></i> Edit Account
             </a>
             <a href="profile.php?delete_account" class="sidebar-link text-danger">

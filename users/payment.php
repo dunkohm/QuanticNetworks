@@ -209,7 +209,7 @@ if(!isset($_SESSION['username'])) {
                                 </li>
                                 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#contact">Contact Us (+245) 114 063 049</a>
+                                    <a class="nav-link" href="#contact">Contact Us (+245) 738 477 554</a>
                                 </li>
                             </ul>
                         </div>
@@ -270,13 +270,13 @@ if(!isset($_SESSION['username'])) {
                             <div class="payment-info mt-3 small text-muted">
                                 <p class="mb-1">• Standard M-Pesa charges apply</p>
                                 <p class="mb-1">• Payment processed instantly</p>
-                                <p>• Need help? Call (+254) 114 063 049</p>
+                                <p>• Need help? Call (+254) 738 477 554</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 text-center">
+            <div class="col-md-6 text-center my-5">
                 <a href="order.php?user_id=<?php echo $user_id ?>" class="h2 text-decoration-none">Pay Offline</a>
             </div>
         </div>

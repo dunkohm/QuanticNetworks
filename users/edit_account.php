@@ -42,22 +42,26 @@ if(isset($_GET['edit_account'])){
 </head>
 <body>
     <h3 class="text-center text-light my-5">Edit User Account</h3>
-    <form action="" method="post" enctype="multipart/form-data" class="text-center">
+    <form action="" method="post" enctype="multipart/form-data" class="text-center mx-5">
         <div class="form-outline mb-4">
-            <input type="text" class="form-control w-50 m-auto" name="user_username" value="<?php echo $user_name  ?>" name="user_username">
+            <label for="username" class="text-light lead">Username</label>
+            <input type="text" class="form-control m-auto" name="user_username" value="<?php echo $user_name  ?>" name="user_username">
         </div>
         <div class="form-outline mb-4">
-            <input type="email" class="form-control w-50 m-auto" value="<?php echo $user_email  ?>" name="user_email">
+            <label for="email" class="text-light lead">Email</label>
+            <input type="email" class="form-control m-auto" value="<?php echo $user_email  ?>" name="user_email">
         </div>
-        <div class="form-outline mb-4 d-flex w-50 m-auto">
+        <div class="form-outline mb-4 d-flex g-2 m-auto">
             <input type="file" class="form-control m-auto" name="user_image">
-            <img src="upImages/<?php echo $user_image ?>" alt="" style="width:150px;border-radius:120px;" class="border border-secondary border-3">
+            <img src="upImages/<?php echo $user_image ?>" alt="" style="width:120px;border-radius:120px;" class="border border-secondary border-3">
         </div>
         <div class="form-outline mb-4">
-            <input type="text" class="form-control w-50 m-auto" value="<?php echo $user_address  ?>" name="user_address">
+            <label for="address" class="text-light lead">Address</label>
+            <input type="text" class="form-control m-auto" value="<?php echo $user_address  ?>" name="user_address">
         </div>
         <div class="form-outline mb-4">
-            <input type="text" class="form-control w-50 m-auto" value="<?php echo $user_contact  ?>" name="user_mobile">
+            <label for="Contact" class="text-light lead">Phone Number</label>
+            <input type="text" class="form-control m-auto" value="<?php echo $user_contact  ?>" name="user_mobile">
         </div>
         <input type="submit" class="btn btn-outline-warning mb-3 px-5" value="Update User" name="user_update">
     </form>

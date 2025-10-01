@@ -146,7 +146,7 @@ include('../functions/main_function.php');
                             <a class="nav-link active" href="../shop.php">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#contact">Contact Us <span>(+254) 114063049</span></a>
+                            <a class="nav-link" href="#contact">Contact Us <span>(+254) 738 477 554</span></a>
                         </li>
                     </ul>
                 </div>

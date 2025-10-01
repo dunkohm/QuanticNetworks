@@ -258,6 +258,50 @@ session_start();
                 0%, 100% { transform: translateY(0); }
                 50% { transform: translateY(-20px); }
               }
+                  /* Sidebar Styling */
+              .sidebar ul li a {
+                color: #212529;
+                text-decoration: none;
+                display: block;
+                padding: 0.4rem 0.6rem;
+                border-radius: 5px;
+                transition: background 0.2s, color 0.2s;
+              }
+              .sidebar ul li a:hover {
+                background-color: #6082ff;
+                color: #fff;
+              }
+
+              /* Header Section */
+              .products-header {
+                background-color: #f8f9fa;
+                border-bottom: 1px solid #e9ecef;
+                margin-bottom: 2rem;
+              }
+              .products-header h1 {
+                font-size: 2.2rem;
+                color: #6082ff;
+                font-weight: 700;
+              }
+              .products-header p {
+                color: #6c757d;
+              }
+
+              /* Search Bar */
+              .search .form-control {
+                border-radius: 8px 0 0 8px;
+                border: 2px solid #6082ff;
+              }
+              .search button {
+                border-radius: 0 8px 8px 0;
+                background-color: #f1e42c;
+                border: 2px solid #f1e42c;
+                font-weight: 600;
+                transition: 0.3s;
+              }
+              .search button:hover {
+                background-color: #ffe83a;
+              }
       </style>
 </head>
 <body class="bg-light">
@@ -319,67 +363,56 @@ session_start();
     </nav>
   </div>
   <main>
-   
-    <div class="container container-fluid bg-light p-0">
+    <div class="container-fluid bg-light p-0">
       <div class="row">
-        <div class="products-header text-center p-2 mt-5">
-          <h2 class="navbar-logo-text mt-3" style="font-size: 2.0rem;">Products</h2>
-          <p class="text-label">Here are some of the Products we offer...</p>
+        <!-- Page Header -->
+        <div class="products-header text-center py-5">
+          <h1 class="mt-5">Our Products</h1>
+          <p>Discover top-quality tech and networking equipment curated for you.</p>
         </div>
-       <!-- search area -->
+
+        <!-- Search Area -->
         <form class="search" action="search_product.php" method="get">
-          <div class="input-group mb-2 p-2 shadow">
-            <input type="text" class="form-control border-primary border-3" placeholder="Search for a product or brand" name="search_data" aria-label="Search"
-              aria-describedby="button-addon2">
-            <!-- <button class="btn btn-outline-success" type="button" id="button-addon2">Search</button> -->
-            <button type="submit" name="search_data_product" class="btn btn-warning border-warning border-3">
-              <i class="bi bi-search me-2"></i> Search
+          <div class="input-group mb-4 p-2 shadow-sm">
+            <input type="text" class="form-control" placeholder="Search for a product or brand" 
+                  name="search_data" aria-label="Search">
+            <button type="submit" name="search_data_product" class="btn">
+              <i class="bi bi-search me-2"></i>Search
             </button>
           </div>
         </form>
+
+        <!-- Main Products Grid -->
         <div class="col-md-10">
-          <div class="row px-1">
-            <!-- Calling function to fetch products from the database -->
+          <div class="row px-2">
             <?php 
-          get_all_products();
-           get_unique_Categories();
-           get_unique_Brands();
+              get_all_products();
+              get_unique_Categories();
+              get_unique_Brands();
             ?>
-          
           </div>
         </div>
 
-        <div class="col-md-2 p-0 mt-4" style="background-color: rgba(96, 130, 255, 0.6);">
-          <!-- products to be displayed -->
-          <ul class="navbar-nav me-auto text-center">
+        <!-- Sidebar -->
+        <div class="col-md-2 sidebar p-0" style="background-color: rgba(96, 130, 255, 0.1);">
+          <!-- Categories -->
+          <ul class="navbar-nav text-center">
             <li class="nav-item bg-warning">
-              <a href="#" class="nav-link text-light">
-                <h4>Categories</h4>
-              </a>
+              <span class="nav-link text-dark fw-bold">Categories</span>
             </li>
-          <!-- Calling function to fetch Categories from db and display on side nav -->
-            <?php 
-            getCategories();
-           
-            ?>
+            <?php getCategories(); ?>
           </ul>
-          <!-- brands to be displayed -->
-          <ul class="navbar-nav me-auto text-center">
+
+          <!-- Brands -->
+          <ul class="navbar-nav text-center mt-3">
             <li class="nav-item bg-warning">
-              <a href="#" class="nav-link text-light">
-                <h4>Brands</h4>
-              </a>
+              <span class="nav-link text-dark fw-bold">Brands</span>
             </li>
-            <!-- Calling function to fetch Brands from db and display on side nav -->
-            <?php 
-            getBrands();
-            
-            ?>
+            <?php getBrands(); ?>
           </ul>
         </div>
       </div>
     </div>
-
 
   </main>
 <footer class="footer mt-5 text-white pt-5 pb-4 position-relative">

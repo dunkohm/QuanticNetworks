@@ -125,7 +125,7 @@ function getBrands(){
       $brand_title=$row_data['brand_title'];
       $brand_id=$row_data['brand_id'];
       echo "<li class='nav-item'>
-      <a href='shop.php?brand=$brand_id' class='nav-link text-light'>$brand_title</a>
+      <a href='shop.php?brand=$brand_id' class='nav-link text-dark text-center'>$brand_title</a>
     </li>";
     }
 }
@@ -140,7 +140,7 @@ function getCategories(){
       $category_title=$row_data['category_title'];
       $category_id=$row_data['category_id'];
       echo "<li class='nav-item'>
-      <a href='shop.php?category=$category_id' class='nav-link text-light'>$category_title</a>
+      <a href='shop.php?category=$category_id' class='nav-link text-dark text-center'>$category_title</a>
     </li>";
     }
 }
@@ -251,6 +251,11 @@ function view_product_details(){
           
           <a href='shop.php?add_to_cart=$product_id' class='btn bg btn-outline-success'>Add to cart</a>
           <a href='display_all_products.php' class='btn btn-outline-primary'>Shop more</a>
+          <div class='text-center my-3'> <a href='https://api.whatsapp.com/send?phone=254738477554&text=Hello! I am interested in $product_title could you please provide more information?' 
+                  class='btn btn-primary me-2'>
+                  <i class='bi bi-whatsapp'></i> Enquire via WhatsApp
+                </a>
+                </div>
         </div>
       </div>
     </div>
@@ -269,6 +274,11 @@ function view_product_details(){
                 <div class='col-md-12 border border-secondary rounded bg-secondary text-light mb-5 shadow'>
                   <h4 class='text-center text-light mt-3'>Product Description</h4>
                   <p class='mt-3 lead text-center mt-3'>$product_description</p>
+                </div>
+                <div class='text-center mb-5'> <a href='https://api.whatsapp.com/send?phone=254738477554&text=Hello! I am interested in $product_title could you please provide more information?' 
+                  class='btn btn-lg btn-primary me-3'>
+                  <i class='bi bi-whatsapp'></i> Enquire via WhatsApp
+                </a>
                 </div>
               </div>
             </div>";

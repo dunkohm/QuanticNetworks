@@ -422,15 +422,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                     
                     <!-- Subtotal section -->
-                    <div class='row mt-4 d-flex justify-content-center align-items-center mb-5'>
+                    <div class='row mt-4 d-block justify-content-center align-items-center mb-5'>
                         <?php if ($result_count > 0) { ?>
-                            <div class="col">
-                                <h4 class='mb-0'>Subtotal(KES): <strong class='text-secondary'><?php echo $total_price; ?> /=</strong></h4>
+                            <div class="col text-center mb-4">
+                                <h5 class='mb-0'>Subtotal(KES): <strong class='text-secondary'><?php echo $total_price; ?> /=</strong></h5>
                             </div>
                             <div class="col text-center">
-                                <a href='display_all_products.php' class='btn btn-outline-primary me-2'>Continue Shopping</a>
-                                <button type='submit' name='update_cart' class='btn btn-primary'>Update All Quantities</button>
-                                <a href='./users/checkout.php' class='btn btn-success ms-2'>Proceed to Checkout</a>
+                                <a href='display_all_products.php' class='btn btn-outline-primary ms-2 mb-2'>Continue Shopping</a>
+                                <button type='submit' name='update_cart' class='btn btn-primary ms-2 mb-2'>Update All Quantities</button>
+                                <a href='./users/checkout.php' class='btn btn-success ms-2 mb-2'>Proceed to Checkout</a>
                             </div>
                         <?php } else { ?>
                             <a href='display_all_products.php' class='btn btn-primary'>Continue Shopping</a>
@@ -496,6 +496,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
     integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
